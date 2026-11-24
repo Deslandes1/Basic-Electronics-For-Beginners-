@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Electronics For Beginners — 100-Lesson Book Codex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg-desk: #1c1917;
+      --bg-sidebar: #26221f;
+      --bg-paper: #fbf8f1;
+      --bg-paper-alt: #f3ede0;
+      --ink-primary: #1f1b18;
+      --ink-secondary: #575049;
+      --ink-muted: #857c72;
+      --ink-on-dark: #f5f2eb;
+      --ink-on-dark-muted: #b5aca2;
+      --accent: #9a3412;
+      --accent-soft: #ffedd5;
+      --success: #166534;
+      --success-soft: #dcfce7;
+      --border-light: #e4dccb;
+      --border-dark: #3b3530;
+      --shadow-book: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #2c2623 0%, var(--bg-desk) 75%);
+      color: var(--ink-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Top Header */
+    .topbar {
+      background: rgba(24, 21, 19, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-dark);
+      color: var(--ink-on-dark);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .crest {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #c2410c, #7c2d12);
+      display: grid;
+      place-items: center;
+      font-family: "Newsreader", Georgia, serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: #fff7ed;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--ink-on-dark-muted);
+    }
+
+    .topbar-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .overall-progress {
+      background: var(--bg-sidebar);
+      border: 1px solid var(--border-dark);
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      color: var(--ink-on-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-radius: 8px;
+      padding: 0.5rem 0.9rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #7c2d12;
+    }
+
+    .btn-secondary {
+      background: var(--bg-paper-alt);
+      color: var(--ink-primary);
+      border-color: var(--border-light);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: #e9e0ce;
+    }
+
+    .btn-ghost-dark {
+      background: transparent;
+      color: var(--ink-on-dark);
+      border-color: var(--border-dark);
+    }
+
+    .btn-ghost-dark:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .btn-lang {
+      background: #fff7ed;
+      color: var(--accent);
+      border-color: #fed7aa;
+      font-weight: 600;
+    }
+
+    .btn-lang:hover:not(:disabled) {
+      background: #ffedd5;
+    }
+
+    /* Main Workspace Layout */
+    .workspace {
+      max-width: 1440px;
+      margin: 1.5rem auto;
+      padding: 0 1.25rem 2.5rem;
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* Sidebar: 100-Lesson Index */
+    .codex-index {
+      background: var(--bg-sidebar);
+      color: var(--ink-on-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 16px;
+      padding: 1.1rem;
+      position: sticky;
+      top: 78px;
+      max-height: calc(100vh - 98px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .index-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .index-header h2 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-on-dark-muted);
+    }
+
+    .search-input,
+    .track-select {
+      width: 100%;
+      background: #1a1715;
+      color: var(--ink-on-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.85rem;
+      font-family: inherit;
+    }
+
+    .search-input:focus,
+    .track-select:focus {
+      outline: 2px solid #c2410c;
+      outline-offset: 1px;
+    }
+
+    .lesson-list {
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding-right: 0.25rem;
+    }
+
+    .lesson-item {
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: 0.6rem 0.7rem;
+      color: var(--ink-on-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.15s ease;
+    }
+
+    .lesson-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .lesson-item.active {
+      background: rgba(194, 65, 12, 0.22);
+      border-color: rgba(234, 88, 12, 0.55);
+    }
+
+    .lesson-item-num {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #fb923c;
+      display: block;
+    }
+
+    .lesson-item-title {
+      font-size: 0.84rem;
+      line-height: 1.3;
+      display: block;
+    }
+
+    .pass-dots {
+      display: flex;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+
+    .pass-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #44403c;
+    }
+
+    .pass-dot.done {
+      background: #4ade80;
+    }
+
+    /* Book Spread Container */
+    .book-shell {
+      background: var(--bg-paper);
+      border-radius: 18px;
+      box-shadow: var(--shadow-book);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+
+    .book-spine-banner {
+      background: var(--bg-paper-alt);
+      border-bottom: 1px solid var(--border-light);
+      padding: 0.85rem 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--ink-secondary);
+    }
+
+    .track-badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.76rem;
+    }
+
+    .book-pages {
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      min-height: 640px;
+    }
+
+    .left-page {
+      padding: 2rem 2.25rem;
+      border-right: 1px solid var(--border-light);
+    }
+
+    .right-page {
+      padding: 1.75rem;
+      background: #f8f3e8;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .lesson-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .lesson-heading {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(1.65rem, 2.5vw, 2.25rem);
+      line-height: 1.2;
+      color: var(--ink-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .lesson-objective {
+      font-style: italic;
+      color: var(--ink-secondary);
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.05rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    /* Three-Pass Loop Switcher */
+    .pass-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .pass-tab {
+      background: var(--bg-paper-alt);
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .pass-tab.active {
+      background: var(--ink-primary);
+      color: #fff;
+      border-color: var(--ink-primary);
+    }
+
+    .pass-tab-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .pass-tab-sub {
+      font-size: 0.76rem;
+      opacity: 0.82;
+      margin-top: 0.15rem;
+    }
+
+    /* AI Professor Audio Bar */
+    .audio-panel {
+      background: var(--bg-paper-alt);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .audio-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+
+    .audio-status {
+      font-size: 0.82rem;
+      color: var(--ink-secondary);
+      font-weight: 500;
+    }
+
+    .speed-group {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+    }
+
+    .speed-btn {
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-light);
+      background: #fff;
+      color: var(--ink-primary);
+      font-size: 0.76rem;
+      cursor: pointer;
+    }
+
+    .speed-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* Reading Body */
+    .reading-prose {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.14rem;
+      line-height: 1.78;
+      color: var(--ink-primary);
+    }
+
+    .reading-prose p {
+      margin-bottom: 1.05rem;
+      padding: 0.35rem 0.5rem;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .reading-prose p.speaking {
+      background: #fef3c7;
+    }
+
+    .reading-count-note {
+      margin-top: 1rem;
+      padding: 0.75rem 0.95rem;
+      border-radius: 10px;
+      background: var(--success-soft);
+      color: var(--success);
+      font-size: 0.84rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* Right Page Cards: InVideo & Active Recall */
+    .side-card {
+      background: #fff;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 1.1rem;
+    }
+
+    .side-card h3 {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-secondary);
+      margin-bottom: 0.65rem;
+    }
+
+    .video-box {
+      border-radius: 10px;
+      overflow: hidden;
+      background: #181513;
+      color: #f5f2eb;
+      border: 1px solid #2e2926;
+    }
+
+    .video-placeholder {
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .video-placeholder p {
+      font-size: 0.84rem;
+      color: #d6cfc7;
+      margin: 0.5rem 0 0.85rem;
+    }
+
+    .video-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      display: block;
+    }
+
+    .takeaways-list {
+      padding-left: 1.15rem;
+      font-size: 0.9rem;
+      color: var(--ink-primary);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .reflection-area {
+      width: 100%;
+      min-height: 82px;
+      margin-top: 0.5rem;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 0.6rem;
+      font-family: inherit;
+      font-size: 0.85rem;
+      resize: vertical;
+      background: var(--bg-paper);
+    }
+
+    .book-footer {
+      background: var(--bg-paper-alt);
+      border-top: 1px solid var(--border-light);
+      padding: 1rem 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    @media (max-width: 980px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+      .codex-index {
+        position: static;
+        max-height: 290px;
+      }
+      .book-pages {
+        grid-template-columns: 1fr;
+      }
+      .left-page {
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+        padding: 1.4rem;
+      }
+      .right-page {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="crest" aria-hidden="true">BE</div>
+      <div>
+        <div class="brand-title" id="brandTitle">Basic Electronics For Beginners</div>
+        <div class="brand-sub" id="brandSub">Book Codex • 100 Beginner Lessons • Read 2–3× + Listen • Gesner Deslandes Method</div>
+      </div>
+    </div>
+    <div class="topbar-controls">
+      <button class="btn btn-lang" id="langToggleBtn" type="button" title="Tap to translate between English and French">
+        🌐 EN → FR
+      </button>
+      <div class="overall-progress" id="overallProgress">0 / 100 Lessons Completed</div>
+      <button class="btn btn-ghost-dark" id="resetProgressBtn" type="button">Reset Progress</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <!-- Left Column: 100-Lesson Index -->
+    <aside class="codex-index" aria-label="100 Lessons Index">
+      <div class="index-header">
+        <h2 id="syllabusHeading">Electronics Syllabus</h2>
+        <span id="filteredCount" style="font-size:0.78rem;color:var(--ink-on-dark-muted);">100 lessons</span>
+      </div>
+      <select class="track-select" id="trackFilter" aria-label="Filter by curriculum track"></select>
+      <input
+        type="search"
+        class="search-input"
+        id="lessonSearch"
+        placeholder="Search lesson number or topic..."
+        aria-label="Search lessons"
+      />
+      <div class="lesson-list" id="lessonList"></div>
+    </aside>
+
+    <!-- Right Column: Book Spread -->
+    <section class="book-shell" aria-label="Lesson Book Spread">
+      <div class="book-spine-banner">
+        <div>
+          <span class="track-badge" id="currentTrackBadge">Track 1</span>
+          <span id="currentPageLabel" style="margin-left:0.5rem;font-weight:600;">Page 1 of 100</span>
+        </div>
+        <div id="passSummaryText">Passes completed: 0 / 3</div>
+      </div>
+
+      <div class="book-pages">
+        <!-- Main Reading & Audio Page -->
+        <article class="left-page">
+          <div class="lesson-kicker" id="lessonKicker">LESSON 01</div>
+          <h1 class="lesson-heading" id="lessonTitle">Loading...</h1>
+          <p class="lesson-objective" id="lessonObjective"></p>
+
+          <!-- Three-Pass Loop -->
+          <div class="pass-tabs" role="tablist" aria-label="Three-Pass Study Loop">
+            <button class="pass-tab active" data-pass="1" type="button">
+              <div class="pass-tab-top"><span id="pass1Label">Pass 1</span><span id="checkPass1">○</span></div>
+              <div class="pass-tab-sub" id="pass1Sub">Visual & Overview</div>
+            </button>
+            <button class="pass-tab" data-pass="2" type="button">
+              <div class="pass-tab-top"><span id="pass2Label">Pass 2</span><span id="checkPass2">○</span></div>
+              <div class="pass-tab-sub" id="pass2Sub">Read + AI Audio</div>
+            </button>
+            <button class="pass-tab" data-pass="3" type="button">
+              <div class="pass-tab-top"><span id="pass3Label">Pass 3</span><span id="checkPass3">○</span></div>
+              <div class="pass-tab-sub" id="pass3Sub">Deep Recall & Notes</div>
+            </button>
+          </div>
+
+          <!-- AI Professor Audio Controls -->
+          <div class="audio-panel">
+            <div class="audio-row">
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                <button class="btn btn-primary" id="playAudioBtn" type="button">▶ Listen to AI Professor</button>
+                <button class="btn btn-secondary" id="stopAudioBtn" type="button">■ Stop</button>
+              </div>
+              <div class="speed-group">
+                <span id="speedLabel">Speed:</span>
+                <button class="speed-btn" data-rate="0.85" type="button">0.85×</button>
+                <button class="speed-btn active" data-rate="1.0" type="button">1.0×</button>
+                <button class="speed-btn" data-rate="1.25" type="button">1.25×</button>
+              </div>
+            </div>
+            <div class="audio-status" id="audioStatus">
+              AI Professor ready — read the text 2–3 times while listening to lock in comprehension.
+            </div>
+            <audio id="customAudioPlayer" controls style="display:none;width:100%;"></audio>
+          </div>
+
+          <!-- Lesson Paragraphs -->
+          <div class="reading-prose" id="readingProse"></div>
+
+          <!-- Read-Count & Pass Completion Bar -->
+          <div class="reading-count-note">
+            <span id="readCountText">Reads recorded for this lesson: 0</span>
+            <div style="display:flex;gap:0.45rem;flex-wrap:wrap;">
+              <button class="btn btn-secondary" id="logReadBtn" type="button">+ Log a Read</button>
+              <button class="btn btn-primary" id="completePassBtn" type="button">Mark Current Pass Done</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Margin Page: InVideo Visual + Takeaways + Reflection -->
+        <aside class="right-page">
+          <div class="side-card">
+            <h3 id="invideoHeading">InVideo Visual Scene</h3>
+            <div class="video-box" id="invideoContainer"></div>
+          </div>
+
+          <div class="side-card">
+            <h3 id="takeawaysHeading">Key Takeaways</h3>
+            <ul class="takeaways-list" id="takeawaysList"></ul>
+          </div>
+
+          <div class="side-card">
+            <h3 id="reflectionHeading">Pass 3 — Learner Reflection</h3>
+            <label for="reflectionInput" id="reflectionPrompt" style="font-size:0.82rem;color:var(--ink-secondary);">
+              Explain this lesson in your own words (as if teaching a friend):
+            </label>
+            <textarea
+              id="reflectionInput"
+              class="reflection-area"
+              placeholder="Write 2–3 sentences summarizing the core idea..."
+            ></textarea>
+            <div style="margin-top:0.55rem;display:flex;justify-content:space-between;align-items:center;">
+              <span id="savedNoteBadge" style="font-size:0.76rem;color:var(--ink-muted);">Saved locally</span>
+              <button class="btn btn-secondary" id="saveNoteBtn" type="button">Save Reflection</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="book-footer">
+        <button class="btn btn-secondary" id="prevLessonBtn" type="button">← Previous Page</button>
+        <span id="footerTip" style="font-size:0.82rem;color:var(--ink-secondary);">
+          Tip: Complete Pass 1, Pass 2, and Pass 3 to master the lesson.
+        </span>
+        <button class="btn btn-primary" id="nextLessonBtn" type="button">Next Page →</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const UI_STRINGS = {
+      en: {
+        langBtn: "🌐 EN → FR",
+        brandTitle: "Basic Electronics For Beginners",
+        brandSub: "Book Codex • 100 Beginner Lessons • Read 2–3× + Listen • Gesner Deslandes Method",
+        overallProgress: (done) => `${done} / 100 Lessons Completed`,
+        resetBtn: "Reset Progress",
+        resetConfirm: "Reset all reading passes, read counts, and notes for Basic Electronics?",
+        syllabusHeading: "Electronics Syllabus",
+        shownCount: (n) => `${n} shown`,
+        allTracks: "All 5 Tracks (Lessons 1–100)",
+        searchPlaceholder: "Search lesson number or topic...",
+        pageLabel: (n) => `Page ${n} of 100`,
+        passesCompleted: (n) => `Passes completed: ${n} / 3`,
+        lessonKicker: (n) => `LESSON ${String(n).padStart(2, "0")}`,
+        pass1: "Pass 1",
+        pass1Sub: "Visual & Overview",
+        pass2: "Pass 2",
+        pass2Sub: "Read + AI Audio",
+        pass3: "Pass 3",
+        pass3Sub: "Deep Recall & Notes",
+        playAudio: "▶ Listen to AI Professor",
+        stopAudio: "■ Stop",
+        speedLabel: "Speed:",
+        audioReadyCustom: "Custom AI Professor audio track loaded for this lesson.",
+        audioReadySpeech: (rate) => `AI Professor voice ready at ${rate}× speed. Click Listen to read along.`,
+        audioStopped: "Narration stopped.",
+        speechUnavailable: "Browser speech synthesis is unavailable here; read the text aloud or attach an audio file.",
+        speechFinished: "AI Professor finished narration. Consider another pass or mark Pass 2 complete!",
+        speechSpeaking: (i, total, rate) => `AI Professor speaking paragraph ${i} of ${total} (${rate}×)...`,
+        readsRecorded: (r) => `Reads recorded for this lesson: ${r} (Aim for 2–3 reads)`,
+        logReadBtn: "+ Log a Read",
+        completePassBtn: "Mark Current Pass Done",
+        invideoHeading: "InVideo Visual Scene",
+        invideoSlotReady: "InVideo Slot Ready",
+        invideoHelp: "Add this lesson's InVideo embed URL in STARTER_LESSONS to display video here.",
+        takeawaysHeading: "Key Takeaways",
+        reflectionHeading: "Pass 3 — Learner Reflection",
+        reflectionPrompt: "Explain this lesson in your own words (as if teaching a friend):",
+        reflectionPlaceholder: "Write 2–3 sentences summarizing the core idea...",
+        savedBadge: "Saved in browser",
+        notSavedBadge: "Not saved yet",
+        saveNoteBtn: "Save Reflection",
+        prevBtn: "← Previous Page",
+        nextBtn: "Next Page →",
+        footerTip: "Tip: Complete Pass 1, Pass 2, and Pass 3 to master the lesson."
+      },
+      fr: {
+        langBtn: "🌐 FR → EN",
+        brandTitle: "Électronique de Base pour Débutants",
+        brandSub: "Codex Livre • 100 Leçons Débutant • Lire 2–3× + Écouter • Méthode Gesner Deslandes",
+        overallProgress: (done) => `${done} / 100 Leçons Terminées`,
+        resetBtn: "Réinitialiser",
+        resetConfirm: "Réinitialiser tous les passages de lecture, lectures et notes ?",
+        syllabusHeading: "Programme Électronique",
+        shownCount: (n) => `${n} affichées`,
+        allTracks: "Les 5 Parcours (Leçons 1–100)",
+        searchPlaceholder: "Rechercher un numéro ou un thème...",
+        pageLabel: (n) => `Page ${n} sur 100`,
+        passesCompleted: (n) => `Passages terminés : ${n} / 3`,
+        lessonKicker: (n) => `LEÇON ${String(n).padStart(2, "0")}`,
+        pass1: "Passe 1",
+        pass1Sub: "Visuel et Aperçu",
+        pass2: "Passe 2",
+        pass2Sub: "Lecture + Audio IA",
+        pass3: "Passe 3",
+        pass3Sub: "Rappel et Notes",
+        playAudio: "▶ Écouter le Professeur IA",
+        stopAudio: "■ Arrêter",
+        speedLabel: "Vitesse :",
+        audioReadyCustom: "Piste audio personnalisée du Professeur IA chargée pour cette leçon.",
+        audioReadySpeech: (rate) => `Voix du Professeur IA prête à ${rate}×. Cliquez sur Écouter pour suivre la lecture.`,
+        audioStopped: "Narration arrêtée.",
+        speechUnavailable: "La synthèse vocale du navigateur n'est pas disponible ici ; lisez à voix haute ou ajoutez un fichier audio.",
+        speechFinished: "Le Professeur IA a terminé la narration. Faites un autre passage ou validez la Passe 2 !",
+        speechSpeaking: (i, total, rate) => `Le Professeur IA lit le paragraphe ${i} sur ${total} (${rate}×)...`,
+        readsRecorded: (r) => `Lectures enregistrées pour cette leçon : ${r} (Visez 2–3 lectures)`,
+        logReadBtn: "+ Noter une Lecture",
+        completePassBtn: "Valider la Passe Active",
+        invideoHeading: "Scène Visuelle InVideo",
+        invideoSlotReady: "Emplacement InVideo Prêt",
+        invideoHelp: "Ajoutez l'URL d'intégration InVideo de cette leçon dans STARTER_LESSONS pour afficher la vidéo.",
+        takeawaysHeading: "Points Clés à Retenir",
+        reflectionHeading: "Passe 3 — Réflexion de l'Apprenant",
+        reflectionPrompt: "Expliquez cette leçon avec vos propres mots (comme si vous l'enseigniez à un ami) :",
+        reflectionPlaceholder: "Écrivez 2–3 phrases résumant l'idée principale...",
+        savedBadge: "Enregistré dans le navigateur",
+        notSavedBadge: "Pas encore enregistré",
+        saveNoteBtn: "Enregistrer la Réflexion",
+        prevBtn: "← Page Précédente",
+        nextBtn: "Page Suivante →",
+        footerTip: "Astuce : Terminez la Passe 1, la Passe 2 et la Passe 3 pour maîtriser la leçon."
+      }
+    };
+
+    const TRACKS = {
+      1: {
+        en: "Track 1: Electricity Basics, Safety & Core Quantities",
+        fr: "Parcours 1 : Bases de l'Électricité, Sécurité et Grandeurs"
+      },
+      2: {
+        en: "Track 2: Resistors, Capacitors, Inductors & Schematics",
+        fr: "Parcours 2 : Résistances, Condensateurs, Bobines et Schémas"
+      },
+      3: {
+        en: "Track 3: Breadboards, Multimeters & Hands-On Circuits",
+        fr: "Parcours 3 : Platines d'Essai, Multimètres et Circuits Pratiques"
+      },
+      4: {
+        en: "Track 4: Diodes, LEDs, Transistors & Logic",
+        fr: "Parcours 4 : Diodes, LED, Transistors et Logique"
+      },
+      5: {
+        en: "Track 5: Sensors, Power Supplies, Microcontrollers & Projects",
+        fr: "Parcours 5 : Capteurs, Alimentations, Microcontrôleurs et Projets"
+      }
+    };
+
+    const STARTER_LESSONS = {
+      1: {
+        en: {
+          title: "What Is Electricity? Charge, Voltage, and Current",
+          objective: "Build a clear mental picture of electric charge, voltage (push), and current (flow) before touching components.",
+          paragraphs: [
+            "Every material is made of atoms containing tiny charged particles called electrons and protons. Electricity happens when electric charge moves or creates forces between charges.",
+            "Think of voltage (measured in volts, V) as the electrical pressure or push that drives charges, similar to water pressure in a pipe. Current (measured in amperes or amps, A) is how fast electric charge flows past a point.",
+            "Read this again while listening to the AI Professor: voltage can exist without current flowing—like pressure behind a closed valve—while current only flows when there is a complete path."
+          ],
+          takeaways: [
+            "Voltage (V) is electrical potential difference—the push that moves charge.",
+            "Current (A) is the flow rate of electric charge in a closed path.",
+            "Always start beginner experiments with low-voltage DC sources and safe habits."
+          ],
+          invideoPrompt: "Animated water-pipe analogy showing voltage as pressure and current as flow rate."
+        },
+        fr: {
+          title: "Qu'est-ce que l'Électricité ? Charge, Tension et Courant",
+          objective: "Construisez une image claire de la charge électrique, de la tension (poussée) et du courant (débit).",
+          paragraphs: [
+            "Toute matière est composée d'atomes contenant de minuscules particules chargées : les électrons et les protons. L'électricité apparaît lorsque des charges électriques se déplacent ou exercent des forces.",
+            "Imaginez la tension (en volts, V) comme la poussée électrique qui met les charges en mouvement, comme la pression de l'eau dans un tuyau. Le courant (en ampères, A) correspond au débit de charge qui circule.",
+            "Relisez ce passage en écoutant le Professeur IA : une tension peut exister sans courant—comme une pression derrière une vanne fermée—tant que le circuit n'est pas fermé."
+          ],
+          takeaways: [
+            "La tension (V) est la différence de potentiel—la poussée qui fait circuler les charges.",
+            "Le courant (A) est le débit des charges électriques dans un chemin fermé.",
+            "Commencez toujours les montages débutants en basse tension continue (DC)."
+          ],
+          invideoPrompt: "Animation comparant un circuit électrique à une conduite d'eau avec pression et débit."
+        },
+        invideoEmbedUrl: "",
+        audioUrl: ""
+      },
+      2: {
+        en: {
+          title: "Resistance and Ohm's Law (V = I × R)",
+          objective: "Understand how resistance limits current and how voltage, current, and resistance relate.",
+          paragraphs: [
+            "Resistance (measured in ohms, Ω) is how strongly a material or component opposes the flow of electric current. A conductor like copper offers very low resistance, while an insulator like rubber blocks current.",
+            "Ohm's Law connects voltage (V), current (I), and resistance (R) in a simple relationship: V = I × R. If voltage stays the same and resistance increases, current drops.",
+            "In beginner electronics, resistors protect delicate parts like LEDs from burning out by limiting how much current passes through them. Re-read this rule twice until V, I, and R feel natural together."
+          ],
+          takeaways: [
+            "Resistance (Ω) opposes current flow and turns electrical energy into heat.",
+            "Ohm's Law states V = I × R (so I = V / R and R = V / I).",
+            "Resistors set safe current levels for LEDs and sensors."
+          ],
+          invideoPrompt: "Visual diagram of Ohm's Law showing how a resistor narrows the path to limit current."
+        },
+        fr: {
+          title: "La Résistance et la Loi d'Ohm (U = R × I)",
+          objective: "Comprenez comment la résistance limite le courant et comment tension, courant et résistance sont liés.",
+          paragraphs: [
+            "La résistance (en ohms, Ω) mesure l'opposition d'un matériau ou d'un composant au passage du courant. Un conducteur comme le cuivre a une très faible résistance, tandis qu'un isolant comme le caoutchouc bloque le courant.",
+            "La loi d'Ohm relie la tension (U ou V), le courant (I) et la résistance (R) : U = R × I. À tension égale, si la résistance augmente, le courant diminue.",
+            "En électronique débutante, les résistances protègent des composants sensibles comme les LED en limitant le courant. Relisez cette relation deux fois pour bien la fixer."
+          ],
+          takeaways: [
+            "La résistance (Ω) s'oppose au passage du courant et dissipe de la chaleur.",
+            "La loi d'Ohm s'écrit U = R × I (donc I = U / R).",
+            "Les résistances protègent les LED et les capteurs contre un courant excessif."
+          ],
+          invideoPrompt: "Schéma montrant comment une résistance limite le débit de courant dans un circuit."
+        },
+        invideoEmbedUrl: "",
+        audioUrl: ""
+      },
+      3: {
+        en: {
+          title: "Open Circuits, Closed Circuits, and Short Circuits",
+          objective: "Spot the difference between a working closed loop, an open break, and a dangerous short circuit.",
+          paragraphs: [
+            "For current to flow continuously around a loop, the circuit must be closed—meaning a continuous conductive path runs from the positive side of the source, through the load, and back to the negative side.",
+            "An open circuit has a break—such as an open switch or disconnected wire—so current stops. A short circuit happens when a near-zero-resistance path connects power directly to ground or opposite polarity, causing a sudden spike in current.",
+            "Short circuits can overheat wires, drain or damage batteries, and create sparks. Always double-check your wiring before connecting power."
+          ],
+          takeaways: [
+            "Closed circuit = complete path and current flows.",
+            "Open circuit = broken path and current stops.",
+            "Short circuit = unintended low-resistance path causing excessive current—check wiring before powering on."
+          ],
+          invideoPrompt: "Three-panel visual comparing Closed Circuit, Open Circuit, and Short Circuit."
+        },
+        fr: {
+          title: "Circuit Ouvert, Circuit Fermé et Court-Circuit",
+          objective: "Distinguez une boucle fermée fonctionnelle, une coupure ouverte et un court-circuit dangereux.",
+          paragraphs: [
+            "Pour qu'un courant circule en continu, le circuit doit être fermé : il faut un chemin conducteur complet depuis la source, à travers le composant, jusqu'au retour.",
+            "Un circuit ouvert comporte une coupure—comme un interrupteur ouvert ou un fil débranché—et le courant s'arrête. Un court-circuit crée un chemin de très faible résistance sans charge, provoquant un fort pic de courant.",
+            "Un court-circuit peut faire chauffer les fils, abîmer une batterie ou créer des étincelles. Vérifiez toujours votre câblage avant de brancher l'alimentation."
+          ],
+          takeaways: [
+            "Circuit fermé = boucle complète, le courant circule.",
+            "Circuit ouvert = boucle coupée, le courant s'arrête.",
+            "Court-circuit = chemin direct à très faible résistance—vérifiez avant mise sous tension."
+          ],
+          invideoPrompt: "Comparaison visuelle en 3 étapes : circuit fermé, circuit ouvert et court-circuit."
+        },
+        invideoEmbedUrl: "",
+        audioUrl: ""
+      },
+      4: {
+        en: {
+          title: "Direct Current (DC) vs. Alternating Current (AC)",
+          objective: "Learn when electronics use steady DC and when walls supply alternating AC.",
+          paragraphs: [
+            "Direct Current (DC) flows in one steady direction over time, which is why batteries, USB ports, and most beginner electronics circuits rely on DC.",
+            "Alternating Current (AC) reverses direction back and forth periodically—for example in household wall outlets. Transformers step AC voltages up or down efficiently for power distribution.",
+            "Before plugging anything into mains AC, remember that beginner electronics labs focus on low-voltage DC (like 3.3 V, 5 V, or 9 V) where you can learn safely."
+          ],
+          takeaways: [
+            "DC flows in one direction; batteries and USB supply DC.",
+            "AC reverses direction periodically and is common in wall power and grids.",
+            "Stick to low-voltage DC for beginner breadboard learning."
+          ],
+          invideoPrompt: "Graph and circuit visual contrasting steady DC line vs. oscillating AC wave."
+        },
+        fr: {
+          title: "Courant Continu (DC) vs Courant Alternatif (AC)",
+          objective: "Sachez quand l'électronique utilise le courant continu et quand le secteur fournit l'alternatif.",
+          paragraphs: [
+            "Le courant continu (DC) circule dans un seul sens : les piles, batteries et ports USB fournissent du courant continu, idéal pour débuter en électronique.",
+            "Le courant alternatif (AC) inverse périodiquement son sens—comme sur les prises murales. Il permet de transporter l'énergie électrique sur de longues distances.",
+            "Pour débuter en toute sécurité, travaillez en basse tension continue (par exemple 3,3 V, 5 V ou 9 V) plutôt que sur le secteur."
+          ],
+          takeaways: [
+            "Le courant continu (DC) garde un seul sens (piles, batteries, USB).",
+            "Le courant alternatif (AC) change de sens périodiquement.",
+            "Privilégiez la basse tension continue pour vos premiers montages."
+          ],
+          invideoPrompt: "Animation comparant une tension continue constante (DC) et une onde alternative (AC)."
+        },
+        invideoEmbedUrl: "",
+        audioUrl: ""
+      },
+      5: {
+        en: {
+          title: "Reading Resistor Color Bands",
+          objective: "Decode standard 4-band resistor values quickly so you pick the right resistor every time.",
+          paragraphs: [
+            "Many through-hole resistors use colored stripes to show their resistance value in ohms because the part itself is too small to print full numbers clearly.",
+            "On a common 4-band resistor, the first two bands give the significant digits, the third band is the multiplier (how many zeros or power of ten to apply), and the fourth band shows tolerance (accuracy).",
+            "Practice reading one or two resistors carefully and always verify with a digital multimeter when you are unsure."
+          ],
+          takeaways: [
+            "4-band resistors: Digit 1, Digit 2, Multiplier, and Tolerance.",
+            "Color codes let you read values quickly at a glance.",
+            "A multimeter confirms exact resistance when colors look faded or close."
+          ],
+          invideoPrompt: "Close-up visual guide to decoding 4 resistor color bands into ohms."
+        },
+        fr: {
+          title: "Lire les Anneaux de Couleur d'une Résistance",
+          objective: "Décodez rapidement les résistances à 4 anneaux pour choisir la bonne valeur à chaque montage.",
+          paragraphs: [
+            "De nombreuses résistances utilisent des anneaux de couleur pour indiquer leur valeur en ohms, car le boîtier est trop petit pour inscrire un texte lisible.",
+            "Sur une résistance classique à 4 anneaux, les deux premiers donnent les chiffres significatifs, le troisième est le multiplicateur, et le quatrième indique la tolérance.",
+            "Entraînez-vous à lire les couleurs calmement et vérifiez toujours au multimètre en cas de doute."
+          ],
+          takeaways: [
+            "Résistance à 4 anneaux : Chiffre 1, Chiffre 2, Multiplicateur et Tolérance.",
+            "Le code couleur permet une lecture rapide sur la table de travail.",
+            "Le multimètre confirme la valeur réelle en cas de doute."
+          ],
+          invideoPrompt: "Guide visuel expliquant le décodage des 4 anneaux de couleur d'une résistance."
+        },
+        invideoEmbedUrl: "",
+        audioUrl: ""
+      }
+    };
+
+    const CURRICULUM_TOPICS_6_TO_100 = [
+      { en: "Series vs. Parallel Circuits", fr: "Circuits en Série vs Circuits en Parallèle" },
+      { en: "Voltage Dividers Explained Simply", fr: "Ponts Diviseurs de Tension Expliqués Simplement" },
+      { en: "Electrical Power: Watts (P = V × I)", fr: "Puissance Électrique : Watts (P = U × I)" },
+      { en: "Ground (GND) and Reference Points", fr: "La Masse (GND) et les Points de Référence" },
+      { en: "Essential Electronics Lab Safety Rules", fr: "Règles Essentielles de Sécurité en Électronique" },
+      { en: "Potentiometers and Variable Resistance", fr: "Potentiomètres et Résistance Variable" },
+      { en: "Capacitors: Storing Electrical Charge", fr: "Condensateurs : Stocker la Charge Électrique" },
+      { en: "Polarized vs. Non-Polarized Capacitors", fr: "Condensateurs Polarisés et Non Polarisés" },
+      { en: "RC Timing and Smoothing Basics", fr: "Bases des Circuits RC, Temporisation et Filtrage" },
+      { en: "Inductors and Magnetic Fields", fr: "Bobines (Inductances) et Champs Magnétiques" },
+      { en: "Reading Basic Circuit Schematics", fr: "Lire des Schémas Électriques Simples" },
+      { en: "Circuit Symbols You Must Know", fr: "Symboles Électriques Indispensables" },
+      { en: "Switches: SPST, SPDT, and Pushbuttons", fr: "Interrupteurs : SPST, SPDT et Boutons-Poussoirs" },
+      { en: "Fuses and Overcurrent Protection", fr: "Fusibles et Protection contre les Surintensités" },
+      { en: "Track 1–2 Review: Core Foundations", fr: "Bilan Parcours 1–2 : Fondamentaux" },
+      { en: "How a Solderless Breadboard Works", fr: "Comment Fonctionne une Plaque d'Essai (Breadboard)" },
+      { en: "Power Rails and Row Connections", fr: "Rails d'Alimentation et Connexions sur Breadboard" },
+      { en: "Using a Digital Multimeter: Voltage", fr: "Utiliser un Multimètre Numérique : Mesurer la Tension" },
+      { en: "Using a Digital Multimeter: Resistance & Continuity", fr: "Multimètre : Résistance et Test de Continuité" },
+      { en: "Measuring Current Safely with a Multimeter", fr: "Mesurer le Courant en Sécurité au Multimètre" },
+      { en: "Building Your First LED + Resistor Circuit", fr: "Monter Votre Premier Circuit LED + Résistance" },
+      { en: "Calculating LED Current-Limiting Resistors", fr: "Calculer la Résistance d'une LED" },
+      { en: "Wiring Two LEDs in Series vs. Parallel", fr: "Câbler Deux LED en Série ou en Parallèle" },
+      { en: "Controlling an LED with a Pushbutton", fr: "Commander une LED avec un Bouton-Poussoir" },
+      { en: "Troubleshooting Dead or Dim Circuits", fr: "Diagnostiquer un Montage Qui Ne S'Allume Pas" },
+      { en: "Wire Gauges, Jumper Wires, and Connections", fr: "Sections de Fils, Câbles Dupont et Connexions" },
+      { en: "Soldering Basics and Safety", fr: "Bases de la Soudure à l'Étain et Sécurité" },
+      { en: "Inspecting Good vs. Cold Solder Joints", fr: "Reconnaître une Bonne Soudure d'une Soudure Froide" },
+      { en: "Desoldering and Fixing Wiring Mistakes", fr: "Dessouder et Corriger les Erreurs de Câblage" },
+      { en: "Building a Clean Beginner Test Bench", fr: "Organiser un Coin Travail Débutant Fiable" },
+      { en: "Semiconductors: Conductors vs. Insulators", fr: "Semi-Conducteurs : Conducteurs vs Isolants" },
+      { en: "Diodes: One-Way Streets for Current", fr: "Diodes : Sens Unique pour le Courant" },
+      { en: "Forward Bias, Reverse Bias, and Voltage Drop", fr: "Polarisation Directe, Inverse et Chute de Tension" },
+      { en: "Protection Diodes and Flyback Protection", fr: "Diodes de Roue Libre et Protection" },
+      { en: "Zener Diodes and Voltage Reference Basics", fr: "Diodes Zener et Régulation de Base" },
+      { en: "Bipolar Junction Transistors (NPN & PNP)", fr: "Transistors Bipolaires (NPN et PNP)" },
+      { en: "Using a Transistor as an Electronic Switch", fr: "Utiliser un Transistor comme Interrupteur" },
+      { en: "Using a Transistor to Amplify Signals", fr: "Utiliser un Transistor pour Amplifier un Signal" },
+      { en: "MOSFETs: High-Efficiency Switching Basics", fr: "MOSFET : Bases de la Commutation Efficace" },
+      { en: "Relays: Low Voltage Controlling Higher Loads", fr: "Relais : Commander une Charge avec une Faible Tension" },
+      { en: "Digital vs. Analog Signals in Electronics", fr: "Signaux Numériques vs Signaux Analogiques" },
+      { en: "Logic Gates: AND, OR, NOT, NAND, NOR", fr: "Portes Logiques : ET, OU, NON, NON-ET, NON-OU" },
+      { en: "Truth Tables Made Simple", fr: "Tables de Vérité Expliquées Simplement" },
+      { en: "Pull-Up and Pull-Down Resistors", fr: "Résistances de Tirage (Pull-Up et Pull-Down)" },
+      { en: "Debouncing Mechanical Buttons", fr: "Anti-Rebond des Boutons Mécaniques" },
+      { en: "Batteries: AA, Li-Ion, LiPo, and Care", fr: "Batteries : AA, Li-Ion, LiPo et Précautions" },
+      { en: "Linear Voltage Regulators (Like 7805)", fr: "Régulateurs de Tension Linéaires (Type 7805)" },
+      { en: "Buck Converters vs. Linear Regulators", fr: "Convertisseurs Buck vs Régulateurs Linéaires" },
+      { en: "USB Power (5V) and Power Banks", fr: "Alimentation USB (5V) et Batteries Externes" },
+      { en: "Sensors: Light (LDR) and Photodiodes", fr: "Capteurs : Lumière (LDR) et Photodiodes" },
+      { en: "Temperature and Humidity Sensors", fr: "Capteurs de Température et d'Humidité" },
+      { en: "Ultrasonic and Infrared Distance Sensors", fr: "Capteurs de Distance Ultrasons et Infrarouge" },
+      { en: "Reading Analog Sensors Safely", fr: "Lire un Capteur Analogique en Sécurité" },
+      { en: "Buzzers, Piezos, and Simple Sound Output", fr: "Buzzers, Piézo et Sortie Sonore Simple" },
+      { en: "DC Motors and Why They Need Drivers", fr: "Moteurs CC et Rôle des Circuits de Commande" },
+      { en: "Servo Motors for Controlled Angles", fr: "Servomoteurs pour un Positionnement Précis" },
+      { en: "What Is a Microcontroller?", fr: "Qu'est-ce qu'un Microcontrôleur ?" },
+      { en: "Digital Pins: Output vs. Input", fr: "Broches Numériques : Sortie vs Entrée" },
+      { en: "PWM (Pulse Width Modulation) Explained", fr: "La MLI / PWM Expliquée Simplement" },
+      { en: "Serial Communication and Debugging Logs", fr: "Communication Série et Débogage par Messages" },
+      { en: "I2C and SPI Basics for Modules", fr: "Bases des Bus I2C et SPI pour Capteurs/Écrans" },
+      { en: "Connecting an OLED or LCD Display", fr: "Connecter un Petit Écran OLED ou LCD" },
+      { en: "Avoiding Common Beginner Wiring Mistakes", fr: "Éviter les Erreurs Classiques de Câblage" },
+      { en: "Reading Datasheets Without Getting Overwhelmed", fr: "Lire une Fiche Technique (Datasheet) Simplement" },
+      { en: "Project 1: Automatic Night Light Circuit", fr: "Projet 1 : Veilleuse Automatique à Capteur de Lumière" },
+      { en: "Project 2: Dual-Button Logic Controller", fr: "Projet 2 : Contrôleur Logique à Deux Boutons" },
+      { en: "Project 3: Temperature Monitor with Alert", fr: "Projet 3 : Moniteur de Température avec Alerte" },
+      { en: "Project 4: Variable Speed Fan / Motor Rig", fr: "Projet 4 : Variateur de Vitesse Moteur / Ventilateur" },
+      { en: "Documenting Your Electronics Builds", fr: "Documenter Vos Montages Électroniques" },
+      { en: "Graduating Beginner Electronics: Next Steps", fr: "Bilan Débutant en Électronique : Étapes Suivantes" }
+    ];
+
+    function buildAllLessons() {
+      const lessons = [];
+      for (let num = 1; num <= 100; num++) {
+        const trackNum = Math.ceil(num / 20);
+        if (STARTER_LESSONS[num]) {
+          lessons.push({
+            number: num,
+            trackNum,
+            invideoEmbedUrl: STARTER_LESSONS[num].invideoEmbedUrl || "",
+            audioUrl: STARTER_LESSONS[num].audioUrl || "",
+            en: STARTER_LESSONS[num].en,
+            fr: STARTER_LESSONS[num].fr
+          });
+        } else {
+          const item = CURRICULUM_TOPICS_6_TO_100[num - 6] || {
+            en: `Beginner Electronics Topic ${num}`,
+            fr: `Thème d'Électronique Débutant ${num}`
+          };
+          const nextNum = Math.min(100, num + 1);
+          lessons.push({
+            number: num,
+            trackNum,
+            invideoEmbedUrl: "",
+            audioUrl: "",
+            en: {
+              title: item.en,
+              objective: `Build practical understanding of "${item.en}" through 2–3 reading passes, AI Professor audio, and reflection.`,
+              paragraphs: [
+                `Welcome to Lesson ${num} of Basic Electronics For Beginners in ${TRACKS[trackNum].en}. Today we explore ${item.en}, an essential building block for real circuits.`,
+                `Take a calm first read to see how ${item.en} fits into circuit behavior. Then read a second time while listening to the AI Professor narration so terms, symbols, and practical use connect clearly.`,
+                `On your third pass, write down how ${item.en} behaves in a real circuit and what to check before applying power.`
+              ],
+              takeaways: [
+                `Key focus: ${item.en} helps you build and troubleshoot circuits reliably.`,
+                `Read 2–3 times and listen to the AI Professor to reinforce key ideas.`,
+                `Apply this concept before moving on to Lesson ${nextNum}.`
+              ],
+              invideoPrompt: `Visual circuit explainer for Lesson ${num}: "${item.en}" in Basic Electronics For Beginners.`
+            },
+            fr: {
+              title: item.fr,
+              objective: `Développez une compréhension pratique de « ${item.fr} » grâce à 2–3 lectures, l'audio du Professeur IA et la réflexion.`,
+              paragraphs: [
+                `Bienvenue à la Leçon ${num} d'Électronique de Base pour Débutants dans le ${TRACKS[trackNum].fr}. Aujourd'hui, nous étudions « ${item.fr} », une notion clé pour vos montages.`,
+                `Faites une première lecture calme pour saisir le rôle de « ${item.fr} ». Relisez ensuite une deuxième fois en écoutant le Professeur IA pour relier termes, symboles et pratique.`,
+                `Lors de la troisième passe, notez comment « ${item.fr} » agit dans un circuit et ce qu'il faut vérifier avant la mise sous tension.`
+              ],
+              takeaways: [
+                `Point clé : « ${item.fr} » vous aide à monter et dépanner vos circuits.`,
+                `Lisez 2 à 3 fois et écoutez le Professeur IA pour bien retenir.`,
+                `Assimilez cette leçon avant de passer à la Leçon ${nextNum}.`
+              ],
+              invideoPrompt: `Capsule visuelle de circuit pour la Leçon ${num} : « ${item.fr} ».`
+            }
+          });
+        }
+      }
+      return lessons;
+    }
+
+    const LESSONS = buildAllLessons();
+    const STORAGE_KEY = "beb_codex_state_v1";
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          return {
+            lang: parsed.lang === "fr" ? "fr" : "en",
+            currentLesson: parsed.currentLesson || 1,
+            currentPass: parsed.currentPass || 1,
+            speechRate: parsed.speechRate || 1.0,
+            lessons: parsed.lessons || {}
+          };
+        }
+      } catch (e) {}
+      return {
+        lang: "en",
+        currentLesson: 1,
+        currentPass: 1,
+        speechRate: 1.0,
+        lessons: {}
+      };
+    }
+
+    let state = loadState();
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+    }
+
+    function t() {
+      return UI_STRINGS[state.lang] || UI_STRINGS.en;
+    }
+
+    function getLessonContent(lesson) {
+      return lesson[state.lang] || lesson.en;
+    }
+
+    function getLessonProgress(num) {
+      if (!state.lessons[num]) {
+        state.lessons[num] = {
+          reads: 0,
+          passes: { 1: false, 2: false, 3: false },
+          note: ""
+        };
+      }
+      return state.lessons[num];
+    }
+
+    function isLessonComplete(num) {
+      const p = getLessonProgress(num);
+      return Boolean(p.passes[1] && p.passes[2] && p.passes[3]);
+    }
+
+    function stopSpeech() {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+      document.querySelectorAll(".reading-prose p.speaking").forEach((el) => {
+        el.classList.remove("speaking");
+      });
+      const customAudio = document.getElementById("customAudioPlayer");
+      if (customAudio && !customAudio.paused) {
+        customAudio.pause();
+      }
+    }
+
+    function renderStaticChrome() {
+      const strings = t();
+      document.documentElement.lang = state.lang;
+      document.getElementById("langToggleBtn").textContent = strings.langBtn;
+      document.getElementById("brandTitle").textContent = strings.brandTitle;
+      document.getElementById("brandSub").textContent = strings.brandSub;
+      document.getElementById("resetProgressBtn").textContent = strings.resetBtn;
+      document.getElementById("syllabusHeading").textContent = strings.syllabusHeading;
+      document.getElementById("lessonSearch").placeholder = strings.searchPlaceholder;
+
+      const trackSelect = document.getElementById("trackFilter");
+      const prevTrackVal = trackSelect.value || "all";
+      trackSelect.innerHTML = `<option value="all">${escapeHtml(strings.allTracks)}</option>`;
+      [1, 2, 3, 4, 5].forEach((n) => {
+        const opt = document.createElement("option");
+        opt.value = String(n);
+        opt.textContent = TRACKS[n][state.lang];
+        trackSelect.appendChild(opt);
+      });
+      trackSelect.value = prevTrackVal;
+
+      document.getElementById("pass1Label").textContent = strings.pass1;
+      document.getElementById("pass1Sub").textContent = strings.pass1Sub;
+      document.getElementById("pass2Label").textContent = strings.pass2;
+      document.getElementById("pass2Sub").textContent = strings.pass2Sub;
+      document.getElementById("pass3Label").textContent = strings.pass3;
+      document.getElementById("pass3Sub").textContent = strings.pass3Sub;
+
+      document.getElementById("playAudioBtn").textContent = strings.playAudio;
+      document.getElementById("stopAudioBtn").textContent = strings.stopAudio;
+      document.getElementById("speedLabel").textContent = strings.speedLabel;
+      document.getElementById("logReadBtn").textContent = strings.logReadBtn;
+      document.getElementById("completePassBtn").textContent = strings.completePassBtn;
+
+      document.getElementById("invideoHeading").textContent = strings.invideoHeading;
+      document.getElementById("takeawaysHeading").textContent = strings.takeawaysHeading;
+      document.getElementById("reflectionHeading").textContent = strings.reflectionHeading;
+      document.getElementById("reflectionPrompt").textContent = strings.reflectionPrompt;
+      document.getElementById("reflectionInput").placeholder = strings.reflectionPlaceholder;
+      document.getElementById("saveNoteBtn").textContent = strings.saveNoteBtn;
+
+      document.getElementById("prevLessonBtn").textContent = strings.prevBtn;
+      document.getElementById("nextLessonBtn").textContent = strings.nextBtn;
+      document.getElementById("footerTip").textContent = strings.footerTip;
+    }
+
+    function renderLessonList() {
+      const strings = t();
+      const listEl = document.getElementById("lessonList");
+      const trackVal = document.getElementById("trackFilter").value;
+      const query = document.getElementById("lessonSearch").value.trim().toLowerCase();
+
+      const filtered = LESSONS.filter((l) => {
+        const content = getLessonContent(l);
+        const matchesTrack = trackVal === "all" || String(l.trackNum) === trackVal;
+        const matchesQuery =
+          !query ||
+          String(l.number).includes(query) ||
+          content.title.toLowerCase().includes(query) ||
+          l.en.title.toLowerCase().includes(query) ||
+          l.fr.title.toLowerCase().includes(query);
+        return matchesTrack && matchesQuery;
+      });
+
+      document.getElementById("filteredCount").textContent = strings.shownCount(filtered.length);
+      listEl.innerHTML = "";
+
+      filtered.forEach((lesson) => {
+        const content = getLessonContent(lesson);
+        const prog = getLessonProgress(lesson.number);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `lesson-item ${lesson.number === state.currentLesson ? "active" : ""}`;
+        btn.innerHTML = `
+          <div>
+            <span class="lesson-item-num">${state.lang === "fr" ? "Leçon" : "Lesson"} ${String(lesson.number).padStart(2, "0")}</span>
+            <span class="lesson-item-title">${escapeHtml(content.title)}</span>
+          </div>
+          <div class="pass-dots">
+            <span class="pass-dot ${prog.passes[1] ? "done" : ""}"></span>
+            <span class="pass-dot ${prog.passes[2] ? "done" : ""}"></span>
+            <span class="pass-dot ${prog.passes[3] ? "done" : ""}"></span>
+          </div>
+        `;
+        btn.addEventListener("click", () => {
+          stopSpeech();
+          state.currentLesson = lesson.number;
+          saveState();
+          renderAll();
+        });
+        listEl.appendChild(btn);
+      });
+    }
+
+    function renderBook() {
+      const strings = t();
+      const lesson = LESSONS[state.currentLesson - 1];
+      const content = getLessonContent(lesson);
+      const prog = getLessonProgress(lesson.number);
+      const trackTitle = TRACKS[lesson.trackNum][state.lang];
+
+      document.getElementById("currentTrackBadge").textContent = trackTitle;
+      document.getElementById("currentPageLabel").textContent = strings.pageLabel(lesson.number);
+      document.getElementById("lessonKicker").textContent = strings.lessonKicker(lesson.number);
+      document.getElementById("lessonTitle").textContent = content.title;
+      document.getElementById("lessonObjective").textContent = content.objective;
+
+      [1, 2, 3].forEach((pNum) => {
+        const tab = document.querySelector(`.pass-tab[data-pass="${pNum}"]`);
+        tab.classList.toggle("active", state.currentPass === pNum);
+        document.getElementById(`checkPass${pNum}`).textContent = prog.passes[pNum] ? "✓" : "○";
+      });
+
+      const donePasses = [1, 2, 3].filter((n) => prog.passes[n]).length;
+      document.getElementById("passSummaryText").textContent = strings.passesCompleted(donePasses);
+
+      const proseEl = document.getElementById("readingProse");
+      proseEl.innerHTML = content.paragraphs
+        .map((para, idx) => `<p data-para-index="${idx}">${escapeHtml(para)}</p>`)
+        .join("");
+
+      document.getElementById("readCountText").textContent = strings.readsRecorded(prog.reads);
+
+      const customAudio = document.getElementById("customAudioPlayer");
+      if (lesson.audioUrl) {
+        customAudio.src = lesson.audioUrl;
+        customAudio.style.display = "block";
+        document.getElementById("audioStatus").textContent = strings.audioReadyCustom;
+      } else {
+        customAudio.style.display = "none";
+        customAudio.removeAttribute("src");
+        document.getElementById("audioStatus").textContent = strings.audioReadySpeech(state.speechRate);
+      }
+
+      const invideoEl = document.getElementById("invideoContainer");
+      if (lesson.invideoEmbedUrl) {
+        invideoEl.innerHTML = `<iframe class="video-frame" src="${escapeAttribute(lesson.invideoEmbedUrl)}" allowfullscreen title="InVideo visual for ${escapeAttribute(content.title)}"></iframe>`;
+      } else {
+        invideoEl.innerHTML = `
+          <div class="video-placeholder">
+            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:#fb923c;font-weight:700;">
+              ${escapeHtml(strings.invideoSlotReady)}
+            </div>
+            <p>${escapeHtml(content.invideoPrompt)}</p>
+            <span style="font-size:0.75rem;color:#a8a29e;">
+              ${escapeHtml(strings.invideoHelp)}
+            </span>
+          </div>
+        `;
+      }
+
+      const takeawaysEl = document.getElementById("takeawaysList");
+      takeawaysEl.innerHTML = content.takeaways.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+
+      document.getElementById("reflectionInput").value = prog.note || "";
+      document.getElementById("savedNoteBadge").textContent = prog.note
+        ? strings.savedBadge
+        : strings.notSavedBadge;
+
+      document.getElementById("prevLessonBtn").disabled = lesson.number <= 1;
+      document.getElementById("nextLessonBtn").disabled = lesson.number >= 100;
+
+      const completedCount = LESSONS.filter((l) => isLessonComplete(l.number)).length;
+      document.getElementById("overallProgress").textContent = strings.overallProgress(completedCount);
+    }
+
+    function renderAll() {
+      renderStaticChrome();
+      renderLessonList();
+      renderBook();
+    }
+
+    function playAiProfessor() {
+      const strings = t();
+      const lesson = LESSONS[state.currentLesson - 1];
+      const content = getLessonContent(lesson);
+      const prog = getLessonProgress(lesson.number);
+
+      if (lesson.audioUrl) {
+        const customAudio = document.getElementById("customAudioPlayer");
+        customAudio.playbackRate = state.speechRate;
+        customAudio.play();
+        prog.reads += 1;
+        saveState();
+        renderBook();
+        return;
+      }
+
+      if (!("speechSynthesis" in window)) {
+        document.getElementById("audioStatus").textContent = strings.speechUnavailable;
+        return;
+      }
+
+      stopSpeech();
+      prog.reads += 1;
+      saveState();
+      renderBook();
+
+      const paras = document.querySelectorAll("#readingProse p");
+      let idx = 0;
+
+      function speakNext() {
+        paras.forEach((p) => p.classList.remove("speaking"));
+        if (idx >= content.paragraphs.length) {
+          document.getElementById("audioStatus").textContent = strings.speechFinished;
+          return;
+        }
+        const text = content.paragraphs[idx];
+        if (paras[idx]) {
+          paras[idx].classList.add("speaking");
+          paras[idx].scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = state.lang === "fr" ? "fr-FR" : "en-US";
+        utter.rate = state.speechRate;
+        utter.onend = () => {
+          idx += 1;
+          speakNext();
+        };
+        utter.onerror = () => {
+          document.getElementById("audioStatus").textContent = strings.audioStopped;
+        };
+        document.getElementById("audioStatus").textContent = strings.speechSpeaking(
+          idx + 1,
+          content.paragraphs.length,
+          state.speechRate
+        );
+        window.speechSynthesis.speak(utter);
+      }
+
+      speakNext();
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function escapeAttribute(str) {
+      return escapeHtml(str).replaceAll("'", "&#39;");
+    }
+
+    document.getElementById("langToggleBtn").addEventListener("click", () => {
+      stopSpeech();
+      state.lang = state.lang === "en" ? "fr" : "en";
+      saveState();
+      renderAll();
+    });
+
+    document.querySelectorAll(".pass-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        state.currentPass = Number(tab.dataset.pass);
+        saveState();
+        renderBook();
+      });
+    });
+
+    document.querySelectorAll(".speed-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.speechRate = Number(btn.dataset.rate);
+        document.querySelectorAll(".speed-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        saveState();
+        renderBook();
+      });
+    });
+
+    document.getElementById("playAudioBtn").addEventListener("click", playAiProfessor);
+    document.getElementById("stopAudioBtn").addEventListener("click", () => {
+      stopSpeech();
+      document.getElementById("audioStatus").textContent = t().audioStopped;
+    });
+
+    document.getElementById("logReadBtn").addEventListener("click", () => {
+      const prog = getLessonProgress(state.currentLesson);
+      prog.reads += 1;
+      saveState();
+      renderBook();
+    });
+
+    document.getElementById("completePassBtn").addEventListener("click", () => {
+      const prog = getLessonProgress(state.currentLesson);
+      prog.passes[state.currentPass] = true;
+      if (state.currentPass < 3) {
+        state.currentPass += 1;
+      }
+      saveState();
+      renderAll();
+    });
+
+    document.getElementById("saveNoteBtn").addEventListener("click", () => {
+      const prog = getLessonProgress(state.currentLesson);
+      prog.note = document.getElementById("reflectionInput").value.trim();
+      saveState();
+      document.getElementById("savedNoteBadge").textContent = t().savedBadge;
+    });
+
+    document.getElementById("prevLessonBtn").addEventListener("click", () => {
+      if (state.currentLesson > 1) {
+        stopSpeech();
+        state.currentLesson -= 1;
+        state.currentPass = 1;
+        saveState();
+        renderAll();
+      }
+    });
+
+    document.getElementById("nextLessonBtn").addEventListener("click", () => {
+      if (state.currentLesson < 100) {
+        stopSpeech();
+        state.currentLesson += 1;
+        state.currentPass = 1;
+        saveState();
+        renderAll();
+      }
+    });
+
+    document.getElementById("trackFilter").addEventListener("change", renderLessonList);
+    document.getElementById("lessonSearch").addEventListener("input", renderLessonList);
+
+    document.getElementById("resetProgressBtn").addEventListener("click", () => {
+      if (confirm(t().resetConfirm)) {
+        stopSpeech();
+        const currentLang = state.lang;
+        state = {
+          lang: currentLang,
+          currentLesson: 1,
+          currentPass: 1,
+          speechRate: 1.0,
+          lessons: {}
+        };
+        saveState();
+        renderAll();
+      }
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>
