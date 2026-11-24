@@ -154,6 +154,12 @@
       text-decoration: none;
     }
 
+    .btn-sm {
+      padding: 0.32rem 0.65rem;
+      font-size: 0.76rem;
+      border-radius: 6px;
+    }
+
     .btn:disabled {
       opacity: 0.45;
       cursor: not-allowed;
@@ -536,12 +542,20 @@
       padding: 1.05rem;
     }
 
+    .side-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
     .side-card h3 {
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.07em;
       color: var(--ink-secondary);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0;
     }
 
     /* Interactive NVIDIA AI Studio Card */
@@ -629,30 +643,105 @@
       transition: width 0.25s ease;
     }
 
-    .video-box {
+    /* Logo-Masked Embedded Video Stage (Normal + Fullscreen) */
+    .video-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
       border-radius: 10px;
       overflow: hidden;
-      background: #121510;
-      color: #f4f7f1;
-      border: 1px solid #282f24;
+      background: #090b08;
+      border: 1px solid rgba(118, 185, 0, 0.35);
     }
 
-    .video-placeholder {
-      padding: 1.15rem;
-      text-align: center;
-    }
-
-    .video-placeholder p {
-      font-size: 0.83rem;
-      color: #c8d1c2;
-      margin: 0.45rem 0 0.75rem;
+    .video-stage:fullscreen,
+    .video-stage:-webkit-full-screen {
+      width: 100vw;
+      height: 100vh;
+      max-width: none;
+      max-height: none;
+      aspect-ratio: auto;
+      border-radius: 0;
+      border: none;
+      background: #000;
     }
 
     .video-frame {
       width: 100%;
-      aspect-ratio: 16 / 9;
+      height: 100%;
       border: 0;
       display: block;
+    }
+
+    /* Overlays block clicks/visibility on YouTube watermark & corner brand badges */
+    .logo-mask-top-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 190px;
+      height: 58px;
+      background: linear-gradient(135deg, rgba(12, 15, 10, 0.96), rgba(18, 22, 15, 0.92));
+      border-bottom-left-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 0.65rem;
+      pointer-events: none;
+      z-index: 5;
+      border-left: 1px solid rgba(118, 185, 0, 0.28);
+      border-bottom: 1px solid rgba(118, 185, 0, 0.28);
+    }
+
+    .logo-mask-bottom-right {
+      position: absolute;
+      bottom: 42px;
+      right: 6px;
+      width: 126px;
+      height: 36px;
+      background: rgba(12, 15, 10, 0.96);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 5;
+      border: 1px solid rgba(118, 185, 0, 0.25);
+    }
+
+    .logo-mask-bottom-left {
+      position: absolute;
+      bottom: 42px;
+      left: 6px;
+      width: 148px;
+      height: 34px;
+      background: rgba(12, 15, 10, 0.95);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 5;
+      border: 1px solid rgba(118, 185, 0, 0.25);
+    }
+
+    .mask-tag {
+      font-family: "Inter", sans-serif;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--nv-green-bright);
+      white-space: nowrap;
+    }
+
+    .video-caption-bar {
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.76rem;
+      color: var(--ink-secondary);
     }
 
     .takeaways-list {
@@ -909,8 +998,32 @@
           </div>
 
           <div class="side-card">
-            <h3 id="invideoHeading">InVideo Visual Scene</h3>
-            <div class="video-box" id="invideoContainer"></div>
+            <div class="side-card-header">
+              <h3 id="invideoHeading">InVideo Visual Scene</h3>
+              <button class="btn btn-ghost-dark btn-sm" id="fullscreenVideoBtn" type="button">⛶ Fullscreen</button>
+            </div>
+            <div class="video-stage" id="videoStage">
+              <iframe
+                id="videoFrame"
+                class="video-frame"
+                src="https://www.youtube-nocookie.com/embed/uXr4lXYjXuU?rel=0&modestbranding=1&iv_load_policy=3&playsinline=1"
+                title="Basic Electronics Visual Scene"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowfullscreen
+              ></iframe>
+              <div class="logo-mask-top-right" aria-hidden="true">
+                <span class="mask-tag">GD ELECTRONICS LAB</span>
+              </div>
+              <div class="logo-mask-bottom-left" aria-hidden="true">
+                <span class="mask-tag">NVIDIA CODEX</span>
+              </div>
+              <div class="logo-mask-bottom-right" aria-hidden="true">
+                <span class="mask-tag">GESNER DESLANDES</span>
+              </div>
+            </div>
+            <div class="video-caption-bar">
+              <span id="videoCaptionText">Custom studio frame with logo-masking overlays active in normal &amp; fullscreen view.</span>
+            </div>
           </div>
 
           <div class="side-card">
@@ -994,6 +1107,8 @@
   </div>
 
   <script>
+    const SHARED_VIDEO_ID = "uXr4lXYjXuU";
+
     const UI_STRINGS = {
       en: {
         langBtn: "🌐 EN → FR",
@@ -1047,8 +1162,9 @@
           }
         },
         invideoHeading: "InVideo Visual Scene",
-        invideoSlotReady: "InVideo Slot Ready",
-        invideoHelp: "Add this lesson's InVideo embed URL in STARTER_LESSONS to display video here.",
+        fullscreenBtn: "⛶ Fullscreen",
+        exitFullscreenBtn: "⛶ Exit Fullscreen",
+        videoCaptionText: "Custom studio frame with logo-masking overlays active in normal & fullscreen view.",
         takeawaysHeading: "Key Takeaways",
         reflectionHeading: "Pass 3 — Learner Reflection",
         reflectionPrompt: "Explain this lesson in your own words (as if teaching a friend):",
@@ -1119,8 +1235,9 @@
           }
         },
         invideoHeading: "Scène Visuelle InVideo",
-        invideoSlotReady: "Emplacement InVideo Prêt",
-        invideoHelp: "Ajoutez l'URL d'intégration InVideo de cette leçon dans STARTER_LESSONS pour afficher la vidéo.",
+        fullscreenBtn: "⛶ Plein Écran",
+        exitFullscreenBtn: "⛶ Quitter Plein Écran",
+        videoCaptionText: "Cadre studio avec masques anti-logo actifs en mode normal et plein écran.",
         takeawaysHeading: "Points Clés à Retenir",
         reflectionHeading: "Passe 3 — Réflexion de l'Apprenant",
         reflectionPrompt: "Expliquez cette leçon avec vos propres mots (comme si vous l'enseigniez à un ami) :",
@@ -1178,8 +1295,7 @@
             "Voltage (V) is electrical potential difference—the push that moves charge.",
             "Current (A) is the flow rate of electric charge in a closed path.",
             "Always start beginner experiments with low-voltage DC sources and safe habits."
-          ],
-          invideoPrompt: "Animated water-pipe analogy showing voltage as pressure and current as flow rate."
+          ]
         },
         fr: {
           title: "Qu'est-ce que l'Électricité ? Charge, Tension et Courant",
@@ -1193,10 +1309,9 @@
             "La tension (V) est la différence de potentiel—la poussée qui fait circuler les charges.",
             "Le courant (A) est le débit des charges électriques dans un chemin fermé.",
             "Commencez toujours les montages débutants en basse tension continue (DC)."
-          ],
-          invideoPrompt: "Animation comparant un circuit électrique à une conduite d'eau avec pression et débit."
+          ]
         },
-        invideoEmbedUrl: "",
+        videoId: SHARED_VIDEO_ID,
         audioUrl: ""
       },
       2: {
@@ -1212,8 +1327,7 @@
             "Resistance (Ω) opposes current flow and turns electrical energy into heat.",
             "Ohm's Law states V = I × R (so I = V / R and R = V / I).",
             "Resistors set safe current levels for LEDs and sensors."
-          ],
-          invideoPrompt: "Visual diagram of Ohm's Law showing how a resistor narrows the path to limit current."
+          ]
         },
         fr: {
           title: "La Résistance et la Loi d'Ohm (U = R × I)",
@@ -1227,10 +1341,9 @@
             "La résistance (Ω) s'oppose au passage du courant et dissipe de la chaleur.",
             "La loi d'Ohm s'écrit U = R × I (donc I = U / R).",
             "Les résistances protègent les LED et les capteurs contre un courant excessif."
-          ],
-          invideoPrompt: "Schéma montrant comment une résistance limite le débit de courant dans un circuit."
+          ]
         },
-        invideoEmbedUrl: "",
+        videoId: SHARED_VIDEO_ID,
         audioUrl: ""
       },
       3: {
@@ -1246,8 +1359,7 @@
             "Closed circuit = complete path and current flows.",
             "Open circuit = broken path and current stops.",
             "Short circuit = unintended low-resistance path causing excessive current—check wiring before powering on."
-          ],
-          invideoPrompt: "Three-panel visual comparing Closed Circuit, Open Circuit, and Short Circuit."
+          ]
         },
         fr: {
           title: "Circuit Ouvert, Circuit Fermé et Court-Circuit",
@@ -1261,10 +1373,9 @@
             "Circuit fermé = boucle complète, le courant circule.",
             "Circuit ouvert = boucle coupée, le courant s'arrête.",
             "Court-circuit = chemin direct à très faible résistance—vérifiez avant mise sous tension."
-          ],
-          invideoPrompt: "Comparaison visuelle en 3 étapes : circuit fermé, circuit ouvert et court-circuit."
+          ]
         },
-        invideoEmbedUrl: "",
+        videoId: SHARED_VIDEO_ID,
         audioUrl: ""
       },
       4: {
@@ -1280,8 +1391,7 @@
             "DC flows in one direction; batteries and USB supply DC.",
             "AC reverses direction periodically and is common in wall power and grids.",
             "Stick to low-voltage DC for beginner breadboard learning."
-          ],
-          invideoPrompt: "Graph and circuit visual contrasting steady DC line vs. oscillating AC wave."
+          ]
         },
         fr: {
           title: "Courant Continu (DC) vs Courant Alternatif (AC)",
@@ -1295,10 +1405,9 @@
             "Le courant continu (DC) garde un seul sens (piles, batteries, USB).",
             "Le courant alternatif (AC) change de sens périodiquement.",
             "Privilégiez la basse tension continue pour vos premiers montages."
-          ],
-          invideoPrompt: "Animation comparant une tension continue constante (DC) et une onde alternative (AC)."
+          ]
         },
-        invideoEmbedUrl: "",
+        videoId: SHARED_VIDEO_ID,
         audioUrl: ""
       },
       5: {
@@ -1314,8 +1423,7 @@
             "4-band resistors: Digit 1, Digit 2, Multiplier, and Tolerance.",
             "Color codes let you read values quickly at a glance.",
             "A multimeter confirms exact resistance when colors look faded or close."
-          ],
-          invideoPrompt: "Close-up visual guide to decoding 4 resistor color bands into ohms."
+          ]
         },
         fr: {
           title: "Lire les Anneaux de Couleur d'une Résistance",
@@ -1329,10 +1437,9 @@
             "Résistance à 4 anneaux : Chiffre 1, Chiffre 2, Multiplicateur et Tolérance.",
             "Le code couleur permet une lecture rapide sur la table de travail.",
             "Le multimètre confirme la valeur réelle en cas de doute."
-          ],
-          invideoPrompt: "Guide visuel expliquant le décodage des 4 anneaux de couleur d'une résistance."
+          ]
         },
-        invideoEmbedUrl: "",
+        videoId: SHARED_VIDEO_ID,
         audioUrl: ""
       }
     };
@@ -1418,7 +1525,7 @@
           lessons.push({
             number: num,
             trackNum,
-            invideoEmbedUrl: STARTER_LESSONS[num].invideoEmbedUrl || "",
+            videoId: STARTER_LESSONS[num].videoId || SHARED_VIDEO_ID,
             audioUrl: STARTER_LESSONS[num].audioUrl || "",
             en: STARTER_LESSONS[num].en,
             fr: STARTER_LESSONS[num].fr
@@ -1432,7 +1539,7 @@
           lessons.push({
             number: num,
             trackNum,
-            invideoEmbedUrl: "",
+            videoId: SHARED_VIDEO_ID,
             audioUrl: "",
             en: {
               title: item.en,
@@ -1446,8 +1553,7 @@
                 `Key focus: ${item.en} helps you build and troubleshoot circuits reliably.`,
                 `Read 2–3 times and listen to the AI Professor to reinforce key ideas.`,
                 `Apply this concept before moving on to Lesson ${nextNum}.`
-              ],
-              invideoPrompt: `Visual circuit explainer for Lesson ${num}: "${item.en}" in Basic Electronics For Beginners.`
+              ]
             },
             fr: {
               title: item.fr,
@@ -1461,8 +1567,7 @@
                 `Point clé : « ${item.fr} » vous aide à monter et dépanner vos circuits.`,
                 `Lisez 2 à 3 fois et écoutez le Professeur IA pour bien retenir.`,
                 `Assimilez cette leçon avant de passer à la Leçon ${nextNum}.`
-              ],
-              invideoPrompt: `Capsule visuelle de circuit pour la Leçon ${num} : « ${item.fr} ».`
+              ]
             }
           });
         }
@@ -1471,7 +1576,7 @@
     }
 
     const LESSONS = buildAllLessons();
-    const STORAGE_KEY = "beb_nvidia_codex_v1";
+    const STORAGE_KEY = "beb_nvidia_codex_v2";
 
     function loadState() {
       try {
@@ -1543,6 +1648,15 @@
       }
     }
 
+    function updateFullscreenButtonLabel() {
+      const strings = t();
+      const stage = document.getElementById("videoStage");
+      const isFs = document.fullscreenElement === stage || document.webkitFullscreenElement === stage;
+      document.getElementById("fullscreenVideoBtn").textContent = isFs
+        ? strings.exitFullscreenBtn
+        : strings.fullscreenBtn;
+    }
+
     function renderStaticChrome() {
       const strings = t();
       document.documentElement.lang = state.lang;
@@ -1591,6 +1705,9 @@
       document.getElementById("nvMeterFill").style.width = modeSpec.pct;
 
       document.getElementById("invideoHeading").textContent = strings.invideoHeading;
+      document.getElementById("videoCaptionText").textContent = strings.videoCaptionText;
+      updateFullscreenButtonLabel();
+
       document.getElementById("takeawaysHeading").textContent = strings.takeawaysHeading;
       document.getElementById("reflectionHeading").textContent = strings.reflectionHeading;
       document.getElementById("reflectionPrompt").textContent = strings.reflectionPrompt;
@@ -1699,21 +1816,11 @@
         document.getElementById("audioStatus").textContent = strings.audioReadySpeech(state.speechRate);
       }
 
-      const invideoEl = document.getElementById("invideoContainer");
-      if (lesson.invideoEmbedUrl) {
-        invideoEl.innerHTML = `<iframe class="video-frame" src="${escapeAttribute(lesson.invideoEmbedUrl)}" allowfullscreen title="InVideo visual for ${escapeAttribute(content.title)}"></iframe>`;
-      } else {
-        invideoEl.innerHTML = `
-          <div class="video-placeholder">
-            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--nv-green-bright);font-weight:700;">
-              ${escapeHtml(strings.invideoSlotReady)}
-            </div>
-            <p>${escapeHtml(content.invideoPrompt)}</p>
-            <span style="font-size:0.75rem;color:#9aa394;">
-              ${escapeHtml(strings.invideoHelp)}
-            </span>
-          </div>
-        `;
+      const vidId = lesson.videoId || SHARED_VIDEO_ID;
+      const desiredSrc = `https://www.youtube-nocookie.com/embed/${vidId}?rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`;
+      const videoFrame = document.getElementById("videoFrame");
+      if (videoFrame.getAttribute("src") !== desiredSrc) {
+        videoFrame.setAttribute("src", desiredSrc);
       }
 
       const takeawaysEl = document.getElementById("takeawaysList");
@@ -1806,9 +1913,26 @@
         .replaceAll('"', "&quot;");
     }
 
-    function escapeAttribute(str) {
-      return escapeHtml(str).replaceAll("'", "&#39;");
-    }
+    document.getElementById("fullscreenVideoBtn").addEventListener("click", async () => {
+      const stage = document.getElementById("videoStage");
+      const isFs = document.fullscreenElement === stage || document.webkitFullscreenElement === stage;
+      try {
+        if (!isFs) {
+          if (stage.requestFullscreen) {
+            await stage.requestFullscreen();
+          } else if (stage.webkitRequestFullscreen) {
+            stage.webkitRequestFullscreen();
+          }
+        } else if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      } catch (e) {}
+    });
+
+    document.addEventListener("fullscreenchange", updateFullscreenButtonLabel);
+    document.addEventListener("webkitfullscreenchange", updateFullscreenButtonLabel);
 
     const devModal = document.getElementById("devModal");
     document.getElementById("openDevModalBtn").addEventListener("click", () => {
