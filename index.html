@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Basic Electronics For Beginners — 100-Lesson Book Codex</title>
+  <title>Gesner Deslandes Lifelong Learning University — NVIDIA AI Codex</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -12,22 +12,25 @@
   />
   <style>
     :root {
-      --bg-desk: #1c1917;
-      --bg-sidebar: #26221f;
-      --bg-paper: #fbf8f1;
-      --bg-paper-alt: #f3ede0;
-      --ink-primary: #1f1b18;
-      --ink-secondary: #575049;
-      --ink-muted: #857c72;
-      --ink-on-dark: #f5f2eb;
-      --ink-on-dark-muted: #b5aca2;
-      --accent: #9a3412;
-      --accent-soft: #ffedd5;
-      --success: #166534;
+      --nv-green: #76b900;
+      --nv-green-bright: #8ce000;
+      --nv-green-dark: #4f7d00;
+      --nv-green-soft: rgba(118, 185, 0, 0.14);
+      --bg-desk: #0d0f0c;
+      --bg-sidebar: #141712;
+      --bg-card-dark: #1a1e17;
+      --bg-paper: #fbfaf6;
+      --bg-paper-alt: #f1efe7;
+      --ink-primary: #171a14;
+      --ink-secondary: #4e5449;
+      --ink-muted: #788072;
+      --ink-on-dark: #f4f7f1;
+      --ink-on-dark-muted: #a8b0a2;
+      --success: #15803d;
       --success-soft: #dcfce7;
-      --border-light: #e4dccb;
-      --border-dark: #3b3530;
-      --shadow-book: 0 24px 60px rgba(0, 0, 0, 0.45);
+      --border-light: #dfe2d7;
+      --border-dark: #2a3025;
+      --shadow-book: 0 24px 60px rgba(0, 0, 0, 0.55);
     }
 
     * {
@@ -38,16 +41,19 @@
 
     body {
       font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, #2c2623 0%, var(--bg-desk) 75%);
+      background:
+        radial-gradient(circle at 85% 0%, rgba(118, 185, 0, 0.14) 0%, transparent 42%),
+        radial-gradient(circle at 15% 10%, rgba(118, 185, 0, 0.08) 0%, transparent 38%),
+        var(--bg-desk);
       color: var(--ink-primary);
       min-height: 100vh;
       line-height: 1.6;
     }
 
-    /* Top Header */
+    /* Top NVIDIA-Styled University Bar */
     .topbar {
-      background: rgba(24, 21, 19, 0.94);
-      backdrop-filter: blur(8px);
+      background: rgba(15, 18, 13, 0.94);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-dark);
       color: var(--ink-on-dark);
       padding: 0.85rem 1.5rem;
@@ -58,7 +64,18 @@
       gap: 1rem;
       position: sticky;
       top: 0;
-      z-index: 30;
+      z-index: 40;
+    }
+
+    .topbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--nv-green), var(--nv-green-bright), transparent);
+      opacity: 0.85;
     }
 
     .brand {
@@ -68,17 +85,18 @@
     }
 
     .crest {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 10px;
-      background: linear-gradient(135deg, #c2410c, #7c2d12);
+      background: linear-gradient(135deg, var(--nv-green), var(--nv-green-dark));
       display: grid;
       place-items: center;
-      font-family: "Newsreader", Georgia, serif;
-      font-weight: 600;
-      font-size: 1.15rem;
-      color: #fff7ed;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #0b0d09;
+      border: 1px solid rgba(140, 224, 0, 0.5);
+      box-shadow: 0 0 18px rgba(118, 185, 0, 0.28);
       flex-shrink: 0;
     }
 
@@ -97,12 +115,12 @@
     .topbar-controls {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.6rem;
       flex-wrap: wrap;
     }
 
     .overall-progress {
-      background: var(--bg-sidebar);
+      background: var(--bg-card-dark);
       border: 1px solid var(--border-dark);
       padding: 0.4rem 0.8rem;
       border-radius: 999px;
@@ -110,21 +128,30 @@
       color: var(--ink-on-dark);
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.45rem;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--nv-green-bright);
+      box-shadow: 0 0 8px var(--nv-green);
     }
 
     .btn {
       font-family: inherit;
-      font-size: 0.85rem;
-      font-weight: 500;
+      font-size: 0.84rem;
+      font-weight: 600;
       border-radius: 8px;
-      padding: 0.5rem 0.9rem;
+      padding: 0.5rem 0.88rem;
       cursor: pointer;
       border: 1px solid transparent;
       transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
+      text-decoration: none;
     }
 
     .btn:disabled {
@@ -132,13 +159,14 @@
       cursor: not-allowed;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
+    .btn-nv {
+      background: var(--nv-green);
+      color: #0c0f0a;
+      border-color: var(--nv-green-bright);
     }
 
-    .btn-primary:hover:not(:disabled) {
-      background: #7c2d12;
+    .btn-nv:hover:not(:disabled) {
+      background: var(--nv-green-bright);
     }
 
     .btn-secondary {
@@ -148,33 +176,33 @@
     }
 
     .btn-secondary:hover:not(:disabled) {
-      background: #e9e0ce;
+      background: #e5e2d7;
     }
 
     .btn-ghost-dark {
-      background: transparent;
+      background: var(--bg-card-dark);
       color: var(--ink-on-dark);
       border-color: var(--border-dark);
     }
 
     .btn-ghost-dark:hover:not(:disabled) {
-      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--nv-green);
+      color: var(--nv-green-bright);
     }
 
     .btn-lang {
-      background: #fff7ed;
-      color: var(--accent);
-      border-color: #fed7aa;
-      font-weight: 600;
+      background: var(--nv-green-soft);
+      color: var(--nv-green-bright);
+      border-color: rgba(118, 185, 0, 0.45);
     }
 
     .btn-lang:hover:not(:disabled) {
-      background: #ffedd5;
+      background: rgba(118, 185, 0, 0.24);
     }
 
-    /* Main Workspace Layout */
+    /* Workspace Grid */
     .workspace {
-      max-width: 1440px;
+      max-width: 1460px;
       margin: 1.5rem auto;
       padding: 0 1.25rem 2.5rem;
       display: grid;
@@ -191,8 +219,8 @@
       border-radius: 16px;
       padding: 1.1rem;
       position: sticky;
-      top: 78px;
-      max-height: calc(100vh - 98px);
+      top: 80px;
+      max-height: calc(100vh - 100px);
       display: flex;
       flex-direction: column;
       gap: 0.85rem;
@@ -205,16 +233,16 @@
     }
 
     .index-header h2 {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--ink-on-dark-muted);
+      color: var(--nv-green-bright);
     }
 
     .search-input,
     .track-select {
       width: 100%;
-      background: #1a1715;
+      background: #0d0f0c;
       color: var(--ink-on-dark);
       border: 1px solid var(--border-dark);
       border-radius: 8px;
@@ -225,7 +253,7 @@
 
     .search-input:focus,
     .track-select:focus {
-      outline: 2px solid #c2410c;
+      outline: 2px solid var(--nv-green);
       outline-offset: 1px;
     }
 
@@ -249,22 +277,22 @@
       justify-content: space-between;
       align-items: center;
       gap: 0.5rem;
-      transition: background 0.15s ease;
+      transition: all 0.15s ease;
     }
 
     .lesson-item:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(118, 185, 0, 0.08);
     }
 
     .lesson-item.active {
-      background: rgba(194, 65, 12, 0.22);
-      border-color: rgba(234, 88, 12, 0.55);
+      background: var(--nv-green-soft);
+      border-color: rgba(118, 185, 0, 0.6);
     }
 
     .lesson-item-num {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #fb923c;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--nv-green-bright);
       display: block;
     }
 
@@ -284,14 +312,14 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: #44403c;
+      background: #2f362a;
     }
 
     .pass-dot.done {
-      background: #4ade80;
+      background: var(--nv-green-bright);
     }
 
-    /* Book Spread Container */
+    /* Book Spread */
     .book-shell {
       background: var(--bg-paper);
       border-radius: 18px;
@@ -314,18 +342,19 @@
     }
 
     .track-badge {
-      background: var(--accent-soft);
-      color: var(--accent);
+      background: #141811;
+      color: var(--nv-green-bright);
       font-weight: 600;
-      padding: 0.25rem 0.65rem;
+      padding: 0.25rem 0.7rem;
       border-radius: 999px;
       font-size: 0.76rem;
+      border: 1px solid rgba(118, 185, 0, 0.35);
     }
 
     .book-pages {
       display: grid;
-      grid-template-columns: 1.35fr 0.85fr;
-      min-height: 640px;
+      grid-template-columns: 1.32fr 0.88fr;
+      min-height: 660px;
     }
 
     .left-page {
@@ -334,18 +363,18 @@
     }
 
     .right-page {
-      padding: 1.75rem;
-      background: #f8f3e8;
+      padding: 1.65rem;
+      background: #f5f3eb;
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1.15rem;
     }
 
     .lesson-kicker {
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--accent);
+      color: var(--nv-green-dark);
       font-weight: 700;
       margin-bottom: 0.35rem;
     }
@@ -368,7 +397,7 @@
       border-bottom: 1px solid var(--border-light);
     }
 
-    /* Three-Pass Loop Switcher */
+    /* Three-Pass Loop */
     .pass-tabs {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -387,9 +416,10 @@
     }
 
     .pass-tab.active {
-      background: var(--ink-primary);
+      background: #131710;
       color: #fff;
-      border-color: var(--ink-primary);
+      border-color: var(--nv-green);
+      box-shadow: 0 0 0 1px rgba(118, 185, 0, 0.35);
     }
 
     .pass-tab-top {
@@ -400,6 +430,10 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
+    }
+
+    .pass-tab.active .pass-tab-top span:first-child {
+      color: var(--nv-green-bright);
     }
 
     .pass-tab-sub {
@@ -453,9 +487,10 @@
     }
 
     .speed-btn.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
+      background: #131710;
+      color: var(--nv-green-bright);
+      border-color: var(--nv-green);
+      font-weight: 600;
     }
 
     /* Reading Body */
@@ -474,7 +509,8 @@
     }
 
     .reading-prose p.speaking {
-      background: #fef3c7;
+      background: rgba(118, 185, 0, 0.2);
+      border-left: 3px solid var(--nv-green-dark);
     }
 
     .reading-count-note {
@@ -492,39 +528,124 @@
       flex-wrap: wrap;
     }
 
-    /* Right Page Cards: InVideo & Active Recall */
+    /* Right Margin Cards */
     .side-card {
       background: #fff;
       border: 1px solid var(--border-light);
       border-radius: 12px;
-      padding: 1.1rem;
+      padding: 1.05rem;
     }
 
     .side-card h3 {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.07em;
       color: var(--ink-secondary);
+      margin-bottom: 0.6rem;
+    }
+
+    /* Interactive NVIDIA AI Studio Card */
+    .nv-studio-card {
+      background: #121510;
+      color: var(--ink-on-dark);
+      border: 1px solid rgba(118, 185, 0, 0.45);
+      border-radius: 12px;
+      padding: 1.05rem;
+      box-shadow: inset 0 0 24px rgba(118, 185, 0, 0.06);
+    }
+
+    .nv-studio-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 0.65rem;
+    }
+
+    .nv-studio-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--nv-green-bright);
+    }
+
+    .nv-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.16rem 0.5rem;
+      border-radius: 999px;
+      background: var(--nv-green-soft);
+      color: var(--nv-green-bright);
+      border: 1px solid rgba(118, 185, 0, 0.4);
+    }
+
+    .nv-mode-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .nv-mode-btn {
+      background: #1b2018;
+      color: var(--ink-on-dark-muted);
+      border: 1px solid var(--border-dark);
+      border-radius: 7px;
+      padding: 0.38rem 0.4rem;
+      font-size: 0.74rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .nv-mode-btn.active {
+      background: var(--nv-green);
+      color: #0b0d09;
+      border-color: var(--nv-green-bright);
+    }
+
+    .nv-telemetry-box {
+      background: #0b0d09;
+      border: 1px solid #262c22;
+      border-radius: 8px;
+      padding: 0.65rem 0.75rem;
+      font-size: 0.78rem;
+      color: #d6e0ce;
+      margin-bottom: 0.65rem;
+    }
+
+    .nv-meter-track {
+      height: 6px;
+      border-radius: 999px;
+      background: #23291f;
+      overflow: hidden;
+      margin-top: 0.4rem;
+    }
+
+    .nv-meter-fill {
+      height: 100%;
+      width: 78%;
+      background: linear-gradient(90deg, var(--nv-green-dark), var(--nv-green-bright));
+      transition: width 0.25s ease;
     }
 
     .video-box {
       border-radius: 10px;
       overflow: hidden;
-      background: #181513;
-      color: #f5f2eb;
-      border: 1px solid #2e2926;
+      background: #121510;
+      color: #f4f7f1;
+      border: 1px solid #282f24;
     }
 
     .video-placeholder {
-      padding: 1.25rem;
+      padding: 1.15rem;
       text-align: center;
     }
 
     .video-placeholder p {
-      font-size: 0.84rem;
-      color: #d6cfc7;
-      margin: 0.5rem 0 0.85rem;
+      font-size: 0.83rem;
+      color: #c8d1c2;
+      margin: 0.45rem 0 0.75rem;
     }
 
     .video-frame {
@@ -536,7 +657,7 @@
 
     .takeaways-list {
       padding-left: 1.15rem;
-      font-size: 0.9rem;
+      font-size: 0.89rem;
       color: var(--ink-primary);
       display: flex;
       flex-direction: column;
@@ -545,8 +666,8 @@
 
     .reflection-area {
       width: 100%;
-      min-height: 82px;
-      margin-top: 0.5rem;
+      min-height: 78px;
+      margin-top: 0.45rem;
       border: 1px solid var(--border-light);
       border-radius: 8px;
       padding: 0.6rem;
@@ -554,6 +675,37 @@
       font-size: 0.85rem;
       resize: vertical;
       background: var(--bg-paper);
+    }
+
+    .dev-card-name {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--ink-primary);
+    }
+
+    .dev-card-role {
+      font-size: 0.78rem;
+      color: var(--nv-green-dark);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.55rem;
+    }
+
+    .dev-info-list {
+      list-style: none;
+      font-size: 0.83rem;
+      color: var(--ink-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 0.38rem;
+    }
+
+    .dev-info-list a {
+      color: var(--nv-green-dark);
+      font-weight: 600;
+      word-break: break-word;
     }
 
     .book-footer {
@@ -564,6 +716,48 @@
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
+    }
+
+    /* NVIDIA Developer & System Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 60;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 540px;
+      background: #141712;
+      color: var(--ink-on-dark);
+      border: 1px solid rgba(118, 185, 0, 0.55);
+      border-radius: 16px;
+      padding: 1.4rem;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .modal-header h2 {
+      font-size: 1rem;
+      color: var(--nv-green-bright);
     }
 
     @media (max-width: 980px) {
@@ -591,17 +785,23 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <div class="crest" aria-hidden="true">BE</div>
+      <div class="crest" aria-hidden="true">GD</div>
       <div>
-        <div class="brand-title" id="brandTitle">Basic Electronics For Beginners</div>
-        <div class="brand-sub" id="brandSub">Book Codex • 100 Beginner Lessons • Read 2–3× + Listen • Gesner Deslandes Method</div>
+        <div class="brand-title" id="brandTitle">Gesner Deslandes Lifelong Learning University</div>
+        <div class="brand-sub" id="brandSub">
+          Software Developer: Gesner Deslandes • (509)-47385663 • deslandes78@gmail.com • NVIDIA Interactive Codex
+        </div>
       </div>
     </div>
     <div class="topbar-controls">
+      <button class="btn btn-nv" id="openDevModalBtn" type="button">⚡ NVIDIA Dev & Lab</button>
       <button class="btn btn-lang" id="langToggleBtn" type="button" title="Tap to translate between English and French">
         🌐 EN → FR
       </button>
-      <div class="overall-progress" id="overallProgress">0 / 100 Lessons Completed</div>
+      <div class="overall-progress" id="overallProgress">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span id="progressCountText">0 / 100 Lessons Completed</span>
+      </div>
       <button class="btn btn-ghost-dark" id="resetProgressBtn" type="button">Reset Progress</button>
     </div>
   </header>
@@ -610,7 +810,7 @@
     <!-- Left Column: 100-Lesson Index -->
     <aside class="codex-index" aria-label="100 Lessons Index">
       <div class="index-header">
-        <h2 id="syllabusHeading">Electronics Syllabus</h2>
+        <h2 id="syllabusHeading">Year 1 Syllabus</h2>
         <span id="filteredCount" style="font-size:0.78rem;color:var(--ink-on-dark-muted);">100 lessons</span>
       </div>
       <select class="track-select" id="trackFilter" aria-label="Filter by curriculum track"></select>
@@ -661,7 +861,7 @@
           <div class="audio-panel">
             <div class="audio-row">
               <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-                <button class="btn btn-primary" id="playAudioBtn" type="button">▶ Listen to AI Professor</button>
+                <button class="btn btn-nv" id="playAudioBtn" type="button">▶ Listen to AI Professor</button>
                 <button class="btn btn-secondary" id="stopAudioBtn" type="button">■ Stop</button>
               </div>
               <div class="speed-group">
@@ -685,13 +885,29 @@
             <span id="readCountText">Reads recorded for this lesson: 0</span>
             <div style="display:flex;gap:0.45rem;flex-wrap:wrap;">
               <button class="btn btn-secondary" id="logReadBtn" type="button">+ Log a Read</button>
-              <button class="btn btn-primary" id="completePassBtn" type="button">Mark Current Pass Done</button>
+              <button class="btn btn-nv" id="completePassBtn" type="button">Mark Current Pass Done</button>
             </div>
           </div>
         </article>
 
-        <!-- Margin Page: InVideo Visual + Takeaways + Reflection -->
+        <!-- Margin Page: NVIDIA Studio + InVideo + Takeaways + Reflection + Developer Info -->
         <aside class="right-page">
+          <div class="nv-studio-card">
+            <div class="nv-studio-top">
+              <span class="nv-studio-title" id="nvStudioTitle">NVIDIA AI Professor Studio</span>
+              <span class="nv-pill">RTX / TENSOR LAB</span>
+            </div>
+            <div class="nv-mode-row" role="group" aria-label="NVIDIA Learning Mode">
+              <button class="nv-mode-btn active" data-nv-mode="skim" type="button" id="nvModeSkim">Skim</button>
+              <button class="nv-mode-btn" data-nv-mode="deep" type="button" id="nvModeDeep">Deep Read</button>
+              <button class="nv-mode-btn" data-nv-mode="quiz" type="button" id="nvModeQuiz">Recall</button>
+            </div>
+            <div class="nv-telemetry-box" id="nvTelemetryBox"></div>
+            <div class="nv-meter-track">
+              <div class="nv-meter-fill" id="nvMeterFill"></div>
+            </div>
+          </div>
+
           <div class="side-card">
             <h3 id="invideoHeading">InVideo Visual Scene</h3>
             <div class="video-box" id="invideoContainer"></div>
@@ -717,6 +933,28 @@
               <button class="btn btn-secondary" id="saveNoteBtn" type="button">Save Reflection</button>
             </div>
           </div>
+
+          <div class="side-card">
+            <h3 id="devHeading">Software Developer & Contact</h3>
+            <div class="dev-card-name">Gesner Deslandes</div>
+            <div class="dev-card-role" id="devRole">Software Developer</div>
+            <ul class="dev-info-list">
+              <li>
+                <strong id="devPhoneLabel">Contact info:</strong>
+                <a href="tel:+50947385663">(509)-47385663</a>
+              </li>
+              <li>
+                <strong id="devEmailLabel">Email:</strong>
+                <a href="mailto:deslandes78@gmail.com">deslandes78@gmail.com</a>
+              </li>
+              <li>
+                <strong id="devWebsiteLabel">Website:</strong>
+                <a href="https://deslandes1.github.io/Let-s-Play-with-Jarvis/" target="_blank" rel="noopener noreferrer">
+                  https://deslandes1.github.io/Let-s-Play-with-Jarvis/
+                </a>
+              </li>
+            </ul>
+          </div>
         </aside>
       </div>
 
@@ -725,21 +963,47 @@
         <span id="footerTip" style="font-size:0.82rem;color:var(--ink-secondary);">
           Tip: Complete Pass 1, Pass 2, and Pass 3 to master the lesson.
         </span>
-        <button class="btn btn-primary" id="nextLessonBtn" type="button">Next Page →</button>
+        <button class="btn btn-nv" id="nextLessonBtn" type="button">Next Page →</button>
       </div>
     </section>
   </main>
+
+  <!-- NVIDIA Developer & Lab Modal -->
+  <div class="modal-backdrop" id="devModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="modalTitle">⚡ NVIDIA AI Studio & Developer Profile</h2>
+        <button class="btn btn-ghost-dark" id="closeDevModalBtn" type="button">✕</button>
+      </div>
+      <p style="font-size:0.88rem;color:#d6e0ce;margin-bottom:0.9rem;" id="modalIntro">
+        Built by <strong>Gesner Deslandes</strong> (Software Developer) for multi-pass reading, AI Professor narration, and visual learning.
+      </p>
+      <div class="nv-telemetry-box" style="margin-bottom:1rem;">
+        <div><strong>Software Developer:</strong> Gesner Deslandes</div>
+        <div><strong>Contact info:</strong> <a href="tel:+50947385663" style="color:var(--nv-green-bright);">(509)-47385663</a></div>
+        <div><strong>Email:</strong> <a href="mailto:deslandes78@gmail.com" style="color:var(--nv-green-bright);">deslandes78@gmail.com</a></div>
+        <div><strong>Website:</strong> <a href="https://deslandes1.github.io/Let-s-Play-with-Jarvis/" target="_blank" rel="noopener noreferrer" style="color:var(--nv-green-bright);">https://deslandes1.github.io/Let-s-Play-with-Jarvis/</a></div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:0.5rem;">
+        <a class="btn btn-nv" href="https://deslandes1.github.io/Let-s-Play-with-Jarvis/" target="_blank" rel="noopener noreferrer">
+          Open Website ↗
+        </a>
+        <button class="btn btn-ghost-dark" id="closeDevModalBtnBottom" type="button">Close</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     const UI_STRINGS = {
       en: {
         langBtn: "🌐 EN → FR",
-        brandTitle: "Basic Electronics For Beginners",
-        brandSub: "Book Codex • 100 Beginner Lessons • Read 2–3× + Listen • Gesner Deslandes Method",
+        openDevModalBtn: "⚡ NVIDIA Dev & Lab",
+        brandTitle: "Gesner Deslandes Lifelong Learning University",
+        brandSub: "Software Developer: Gesner Deslandes • (509)-47385663 • deslandes78@gmail.com • NVIDIA Interactive Codex",
         overallProgress: (done) => `${done} / 100 Lessons Completed`,
         resetBtn: "Reset Progress",
-        resetConfirm: "Reset all reading passes, read counts, and notes for Basic Electronics?",
-        syllabusHeading: "Electronics Syllabus",
+        resetConfirm: "Reset all reading passes, read counts, and notes for Year 1?",
+        syllabusHeading: "Year 1 Syllabus",
         shownCount: (n) => `${n} shown`,
         allTracks: "All 5 Tracks (Lessons 1–100)",
         searchPlaceholder: "Search lesson number or topic...",
@@ -764,6 +1028,24 @@
         readsRecorded: (r) => `Reads recorded for this lesson: ${r} (Aim for 2–3 reads)`,
         logReadBtn: "+ Log a Read",
         completePassBtn: "Mark Current Pass Done",
+        nvStudioTitle: "NVIDIA AI Professor Studio",
+        nvModeSkim: "Skim",
+        nvModeDeep: "Deep Read",
+        nvModeQuiz: "Recall",
+        nvTelemetry: {
+          skim: {
+            line: "Tensor Overview Mode • Scan headings, visual hook, and core thesis (Pass 1).",
+            pct: "42%"
+          },
+          deep: {
+            line: "Dual-Stream Read + Audio • Read 2–3× while AI Professor narrates each paragraph.",
+            pct: "78%"
+          },
+          quiz: {
+            line: "Active Recall Engine • Summarize without looking, then write your reflection below.",
+            pct: "100%"
+          }
+        },
         invideoHeading: "InVideo Visual Scene",
         invideoSlotReady: "InVideo Slot Ready",
         invideoHelp: "Add this lesson's InVideo embed URL in STARTER_LESSONS to display video here.",
@@ -774,18 +1056,26 @@
         savedBadge: "Saved in browser",
         notSavedBadge: "Not saved yet",
         saveNoteBtn: "Save Reflection",
+        devHeading: "Software Developer & Contact",
+        devRole: "Software Developer",
+        devPhoneLabel: "Contact info:",
+        devEmailLabel: "Email:",
+        devWebsiteLabel: "Website:",
+        modalTitle: "⚡ NVIDIA AI Studio & Developer Profile",
+        modalIntro: "Built by <strong>Gesner Deslandes</strong> (Software Developer) for multi-pass reading, AI Professor narration, and visual learning.",
         prevBtn: "← Previous Page",
         nextBtn: "Next Page →",
         footerTip: "Tip: Complete Pass 1, Pass 2, and Pass 3 to master the lesson."
       },
       fr: {
         langBtn: "🌐 FR → EN",
-        brandTitle: "Électronique de Base pour Débutants",
-        brandSub: "Codex Livre • 100 Leçons Débutant • Lire 2–3× + Écouter • Méthode Gesner Deslandes",
+        openDevModalBtn: "⚡ Studio NVIDIA & Dev",
+        brandTitle: "Université d'Apprentissage Continu Gesner Deslandes",
+        brandSub: "Développeur Logiciel : Gesner Deslandes • (509)-47385663 • deslandes78@gmail.com • Codex Interactif NVIDIA",
         overallProgress: (done) => `${done} / 100 Leçons Terminées`,
         resetBtn: "Réinitialiser",
-        resetConfirm: "Réinitialiser tous les passages de lecture, lectures et notes ?",
-        syllabusHeading: "Programme Électronique",
+        resetConfirm: "Réinitialiser tous les passages de lecture, lectures et notes de la 1re année ?",
+        syllabusHeading: "Programme 1re Année",
         shownCount: (n) => `${n} affichées`,
         allTracks: "Les 5 Parcours (Leçons 1–100)",
         searchPlaceholder: "Rechercher un numéro ou un thème...",
@@ -810,6 +1100,24 @@
         readsRecorded: (r) => `Lectures enregistrées pour cette leçon : ${r} (Visez 2–3 lectures)`,
         logReadBtn: "+ Noter une Lecture",
         completePassBtn: "Valider la Passe Active",
+        nvStudioTitle: "Studio Professeur IA NVIDIA",
+        nvModeSkim: "Aperçu",
+        nvModeDeep: "Lecture",
+        nvModeQuiz: "Rappel",
+        nvTelemetry: {
+          skim: {
+            line: "Mode Aperçu Rapide • Repérez les titres, la scène visuelle et l'idée clé (Passe 1).",
+            pct: "42%"
+          },
+          deep: {
+            line: "Double Flux Lecture + Audio • Lisez 2–3× pendant la narration du Professeur IA.",
+            pct: "78%"
+          },
+          quiz: {
+            line: "Moteur de Rappel Actif • Résumez de mémoire, puis rédigez votre réflexion ci-dessous.",
+            pct: "100%"
+          }
+        },
         invideoHeading: "Scène Visuelle InVideo",
         invideoSlotReady: "Emplacement InVideo Prêt",
         invideoHelp: "Ajoutez l'URL d'intégration InVideo de cette leçon dans STARTER_LESSONS pour afficher la vidéo.",
@@ -820,6 +1128,13 @@
         savedBadge: "Enregistré dans le navigateur",
         notSavedBadge: "Pas encore enregistré",
         saveNoteBtn: "Enregistrer la Réflexion",
+        devHeading: "Développeur Logiciel et Contact",
+        devRole: "Développeur Logiciel",
+        devPhoneLabel: "Contact :",
+        devEmailLabel: "E-mail :",
+        devWebsiteLabel: "Site web :",
+        modalTitle: "⚡ Studio IA NVIDIA et Profil Développeur",
+        modalIntro: "Développé par <strong>Gesner Deslandes</strong> (Développeur Logiciel) pour la lecture en plusieurs passes, la voix du Professeur IA et l'apprentissage visuel.",
         prevBtn: "← Page Précédente",
         nextBtn: "Page Suivante →",
         footerTip: "Astuce : Terminez la Passe 1, la Passe 2 et la Passe 3 pour maîtriser la leçon."
@@ -828,194 +1143,194 @@
 
     const TRACKS = {
       1: {
-        en: "Track 1: Electricity Basics, Safety & Core Quantities",
-        fr: "Parcours 1 : Bases de l'Électricité, Sécurité et Grandeurs"
+        en: "Track 1: Foundations of Clear Thinking & Reading",
+        fr: "Parcours 1 : Fondamentaux de la Pensée Claire et de la Lecture"
       },
       2: {
-        en: "Track 2: Resistors, Capacitors, Inductors & Schematics",
-        fr: "Parcours 2 : Résistances, Condensateurs, Bobines et Schémas"
+        en: "Track 2: AI Literacy & Modern Systems",
+        fr: "Parcours 2 : Culture IA et Systèmes Modernes"
       },
       3: {
-        en: "Track 3: Breadboards, Multimeters & Hands-On Circuits",
-        fr: "Parcours 3 : Platines d'Essai, Multimètres et Circuits Pratiques"
+        en: "Track 3: Applied Workflows, Coding & Automation",
+        fr: "Parcours 3 : Flux de Travail, Code et Automatisation"
       },
       4: {
-        en: "Track 4: Diodes, LEDs, Transistors & Logic",
-        fr: "Parcours 4 : Diodes, LED, Transistors et Logique"
+        en: "Track 4: AI Agents, Research & Decisions",
+        fr: "Parcours 4 : Agents IA, Recherche et Décisions"
       },
       5: {
-        en: "Track 5: Sensors, Power Supplies, Microcontrollers & Projects",
-        fr: "Parcours 5 : Capteurs, Alimentations, Microcontrôleurs et Projets"
+        en: "Track 5: Creation, Communication & Craft",
+        fr: "Parcours 5 : Création, Communication et Savoir-Faire"
       }
     };
 
     const STARTER_LESSONS = {
       1: {
         en: {
-          title: "What Is Electricity? Charge, Voltage, and Current",
-          objective: "Build a clear mental picture of electric charge, voltage (push), and current (flow) before touching components.",
+          title: "The Three-Pass Method for Deep Comprehension",
+          objective: "Learn why reading once is rarely enough—and how structured re-reading plus audio builds durable memory.",
           paragraphs: [
-            "Every material is made of atoms containing tiny charged particles called electrons and protons. Electricity happens when electric charge moves or creates forces between charges.",
-            "Think of voltage (measured in volts, V) as the electrical pressure or push that drives charges, similar to water pressure in a pipe. Current (measured in amperes or amps, A) is how fast electric charge flows past a point.",
-            "Read this again while listening to the AI Professor: voltage can exist without current flowing—like pressure behind a closed valve—while current only flows when there is a complete path."
+            "Most learners treat reading as a single sprint from top to bottom. When a topic is new or technical, a single pass skims over subtle distinctions and leaves your brain with an illusion of familiarity rather than real understanding.",
+            "In Gesner Deslandes Lifelong Learning University, every lesson is built for two to three deliberate passes. On your first pass, you orient yourself with the visual overview and core question. On your second pass, you read carefully alongside the AI Professor voice to connect vocabulary, structure, and meaning.",
+            "On your third pass, you slow down to test what actually stuck. By combining eyes, ears, and active recall in your own words, you turn fleeting information into a mental model you can apply when AI tools or real-world problems put pressure on you."
           ],
           takeaways: [
-            "Voltage (V) is electrical potential difference—the push that moves charge.",
-            "Current (A) is the flow rate of electric charge in a closed path.",
-            "Always start beginner experiments with low-voltage DC sources and safe habits."
+            "One pass often creates familiarity without deep retention.",
+            "Listening while reading reinforces rhythm, emphasis, and structure.",
+            "A third pass focused on recall turns reading into long-term skill."
           ],
-          invideoPrompt: "Animated water-pipe analogy showing voltage as pressure and current as flow rate."
+          invideoPrompt: "60-second animated book spread showing a student doing Pass 1 visual overview, Pass 2 audio narration, and Pass 3 active recall."
         },
         fr: {
-          title: "Qu'est-ce que l'Électricité ? Charge, Tension et Courant",
-          objective: "Construisez une image claire de la charge électrique, de la tension (poussée) et du courant (débit).",
+          title: "La Méthode des Trois Passages pour une Compréhension Profonde",
+          objective: "Comprenez pourquoi lire une seule fois suffit rarement—et comment la relecture structurée avec l'audio crée une mémoire durable.",
           paragraphs: [
-            "Toute matière est composée d'atomes contenant de minuscules particules chargées : les électrons et les protons. L'électricité apparaît lorsque des charges électriques se déplacent ou exercent des forces.",
-            "Imaginez la tension (en volts, V) comme la poussée électrique qui met les charges en mouvement, comme la pression de l'eau dans un tuyau. Le courant (en ampères, A) correspond au débit de charge qui circule.",
-            "Relisez ce passage en écoutant le Professeur IA : une tension peut exister sans courant—comme une pression derrière une vanne fermée—tant que le circuit n'est pas fermé."
+            "La plupart des apprenants traitent la lecture comme un sprint unique du début à la fin. Lorsqu'un sujet est nouveau ou technique, un seul passage survole des nuances importantes et laisse une illusion de familiarité plutôt qu'une vraie compréhension.",
+            "À l'Université d'Apprentissage Continu Gesner Deslandes, chaque leçon est conçue pour deux à trois passages délibérés. Lors de la première passe, vous vous repérez grâce à l'aperçu visuel et à la question centrale. Lors de la deuxième passe, vous lisez attentivement avec la voix du Professeur IA pour relier vocabulaire, structure et sens.",
+            "Lors de la troisième passe, vous ralentissez pour vérifier ce qui est vraiment retenu. En combinant les yeux, l'oreille et le rappel actif avec vos propres mots, vous transformez une information passagère en un modèle mental solide."
           ],
           takeaways: [
-            "La tension (V) est la différence de potentiel—la poussée qui fait circuler les charges.",
-            "Le courant (A) est le débit des charges électriques dans un chemin fermé.",
-            "Commencez toujours les montages débutants en basse tension continue (DC)."
+            "Une seule lecture crée souvent une familiarité sans mémorisation profonde.",
+            "Écouter tout en lisant renforce le rythme, l'emphase et la structure.",
+            "Une troisième passe centrée sur le rappel transforme la lecture en compétence durable."
           ],
-          invideoPrompt: "Animation comparant un circuit électrique à une conduite d'eau avec pression et débit."
+          invideoPrompt: "Livre animé de 60 secondes montrant un étudiant sur la Passe 1 visuelle, la Passe 2 audio IA et la Passe 3 de rappel actif."
         },
         invideoEmbedUrl: "",
         audioUrl: ""
       },
       2: {
         en: {
-          title: "Resistance and Ohm's Law (V = I × R)",
-          objective: "Understand how resistance limits current and how voltage, current, and resistance relate.",
+          title: "First-Principles Thinking in an AI World",
+          objective: "Break complex problems down to fundamental truths instead of copying surface-level answers.",
           paragraphs: [
-            "Resistance (measured in ohms, Ω) is how strongly a material or component opposes the flow of electric current. A conductor like copper offers very low resistance, while an insulator like rubber blocks current.",
-            "Ohm's Law connects voltage (V), current (I), and resistance (R) in a simple relationship: V = I × R. If voltage stays the same and resistance increases, current drops.",
-            "In beginner electronics, resistors protect delicate parts like LEDs from burning out by limiting how much current passes through them. Re-read this rule twice until V, I, and R feel natural together."
+            "Reasoning by analogy means copying what others already do or what an AI generates on its first try. That works for routine tasks, but it breaks down when constraints change or when an answer sounds plausible yet misses the real bottleneck.",
+            "First-principles thinking asks: what are the most basic, indisputable facts of this situation, and what are we building from scratch? Once you separate real constraints from habits, you can use AI to explore options faster without surrendering judgment.",
+            "Read this paragraph a second time and ask yourself where you usually accept default assumptions. Strong learners in the AI era are not those who memorize trivia—they are those who frame sharper questions."
           ],
           takeaways: [
-            "Resistance (Ω) opposes current flow and turns electrical energy into heat.",
-            "Ohm's Law states V = I × R (so I = V / R and R = V / I).",
-            "Resistors set safe current levels for LEDs and sensors."
+            "Separate hard constraints from inherited habits or defaults.",
+            "Use AI to generate options, but keep human judgment on fundamentals.",
+            "Sharp problem framing beats generic prompting every time."
           ],
-          invideoPrompt: "Visual diagram of Ohm's Law showing how a resistor narrows the path to limit current."
+          invideoPrompt: "Minimalist visual metaphor comparing a pre-built template to building blocks from foundational principles."
         },
         fr: {
-          title: "La Résistance et la Loi d'Ohm (U = R × I)",
-          objective: "Comprenez comment la résistance limite le courant et comment tension, courant et résistance sont liés.",
+          title: "Penser par Premiers Principes dans un Monde d'IA",
+          objective: "Décomposez les problèmes complexes jusqu'aux vérités fondamentales au lieu de copier des réponses superficielles.",
           paragraphs: [
-            "La résistance (en ohms, Ω) mesure l'opposition d'un matériau ou d'un composant au passage du courant. Un conducteur comme le cuivre a une très faible résistance, tandis qu'un isolant comme le caoutchouc bloque le courant.",
-            "La loi d'Ohm relie la tension (U ou V), le courant (I) et la résistance (R) : U = R × I. À tension égale, si la résistance augmente, le courant diminue.",
-            "En électronique débutante, les résistances protègent des composants sensibles comme les LED en limitant le courant. Relisez cette relation deux fois pour bien la fixer."
+            "Raisonner par analogie consiste à reproduire ce que d'autres font déjà ou ce qu'une IA génère dès le premier essai. Cela suffit pour des tâches de routine, mais échoue lorsque les contraintes changent ou qu'une réponse paraît plausible tout en manquant le vrai goulot d'étranglement.",
+            "La pensée par premiers principes demande : quels sont les faits les plus élémentaires et indiscutables de cette situation, et que construisons-nous à partir de zéro ? Une fois les vraies contraintes séparées des habitudes, vous pouvez explorer plus vite avec l'IA sans perdre votre jugement.",
+            "Relisez ce paragraphe une deuxième fois et demandez-vous où vous acceptez des hypothèses par défaut. À l'ère de l'IA, les meilleurs apprenants posent des questions plus justes."
           ],
           takeaways: [
-            "La résistance (Ω) s'oppose au passage du courant et dissipe de la chaleur.",
-            "La loi d'Ohm s'écrit U = R × I (donc I = U / R).",
-            "Les résistances protègent les LED et les capteurs contre un courant excessif."
+            "Séparez les contraintes réelles des habitudes ou réglages par défaut.",
+            "Utilisez l'IA pour explorer des options tout en gardant votre discernement.",
+            "Bien cadrer le problème vaut mieux qu'un prompt générique."
           ],
-          invideoPrompt: "Schéma montrant comment une résistance limite le débit de courant dans un circuit."
+          invideoPrompt: "Métaphore visuelle minimaliste comparant un modèle tout fait à des blocs construits depuis les fondations."
         },
         invideoEmbedUrl: "",
         audioUrl: ""
       },
       3: {
         en: {
-          title: "Open Circuits, Closed Circuits, and Short Circuits",
-          objective: "Spot the difference between a working closed loop, an open break, and a dangerous short circuit.",
+          title: "How Large Language Models Actually Work",
+          objective: "Understand tokens, context windows, and next-token prediction so you work with AI accurately.",
           paragraphs: [
-            "For current to flow continuously around a loop, the circuit must be closed—meaning a continuous conductive path runs from the positive side of the source, through the load, and back to the negative side.",
-            "An open circuit has a break—such as an open switch or disconnected wire—so current stops. A short circuit happens when a near-zero-resistance path connects power directly to ground or opposite polarity, causing a sudden spike in current.",
-            "Short circuits can overheat wires, drain or damage batteries, and create sparks. Always double-check your wiring before connecting power."
+            "A large language model does not store a giant library of fixed pages like a search engine. Instead, it breaks text into small pieces called tokens and predicts the most probable next token given the surrounding context.",
+            "Because the model operates inside a finite context window, everything you give it—instructions, background facts, examples, and your question—competes for attention. Clear structure inside that context directly improves output quality.",
+            "Understanding prediction rather than 'human-like omniscience' explains both AI's speed and its mistakes. When a model lacks grounded facts, it can still produce fluent-sounding text unless you supply reliable sources and verification checks."
           ],
           takeaways: [
-            "Closed circuit = complete path and current flows.",
-            "Open circuit = broken path and current stops.",
-            "Short circuit = unintended low-resistance path causing excessive current—check wiring before powering on."
+            "LLMs predict tokens within a context window rather than looking up fixed answers.",
+            "Context clarity and structure shape the quality of the response.",
+            "Fluency is not proof of truth—always verify critical facts."
           ],
-          invideoPrompt: "Three-panel visual comparing Closed Circuit, Open Circuit, and Short Circuit."
+          invideoPrompt: "Clean motion graphic illustrating text splitting into tokens and flowing through a context window."
         },
         fr: {
-          title: "Circuit Ouvert, Circuit Fermé et Court-Circuit",
-          objective: "Distinguez une boucle fermée fonctionnelle, une coupure ouverte et un court-circuit dangereux.",
+          title: "Comment Fonctionnent Vraiment les Grands Modèles de Langage",
+          objective: "Comprenez les jetons (tokens), la fenêtre de contexte et la prédiction du jeton suivant pour utiliser l'IA avec précision.",
           paragraphs: [
-            "Pour qu'un courant circule en continu, le circuit doit être fermé : il faut un chemin conducteur complet depuis la source, à travers le composant, jusqu'au retour.",
-            "Un circuit ouvert comporte une coupure—comme un interrupteur ouvert ou un fil débranché—et le courant s'arrête. Un court-circuit crée un chemin de très faible résistance sans charge, provoquant un fort pic de courant.",
-            "Un court-circuit peut faire chauffer les fils, abîmer une batterie ou créer des étincelles. Vérifiez toujours votre câblage avant de brancher l'alimentation."
+            "Un grand modèle de langage ne stocke pas une bibliothèque géante de pages fixes comme un moteur de recherche. Il découpe le texte en petites unités appelées jetons et prédit le jeton suivant le plus probable selon le contexte.",
+            "Comme le modèle travaille dans une fenêtre de contexte limitée, tout ce que vous lui fournissez—consignes, faits, exemples et question—influence son attention. Une structure claire améliore directement la qualité de la réponse.",
+            "Comprendre cette prédiction explique à la fois la rapidité de l'IA et ses erreurs. Un texte fluide peut rester faux si vous ne fournissez pas de sources fiables et de vérifications."
           ],
           takeaways: [
-            "Circuit fermé = boucle complète, le courant circule.",
-            "Circuit ouvert = boucle coupée, le courant s'arrête.",
-            "Court-circuit = chemin direct à très faible résistance—vérifiez avant mise sous tension."
+            "Les LLM prédisent des jetons dans un contexte plutôt que de réciter des pages fixes.",
+            "La clarté et l'organisation du contexte déterminent la qualité de la réponse.",
+            "La fluidité d'écriture ne prouve pas la vérité—vérifiez toujours les faits clés."
           ],
-          invideoPrompt: "Comparaison visuelle en 3 étapes : circuit fermé, circuit ouvert et court-circuit."
+          invideoPrompt: "Animation claire montrant un texte découpé en jetons traversant une fenêtre de contexte."
         },
         invideoEmbedUrl: "",
         audioUrl: ""
       },
       4: {
         en: {
-          title: "Direct Current (DC) vs. Alternating Current (AC)",
-          objective: "Learn when electronics use steady DC and when walls supply alternating AC.",
+          title: "Context Engineering: Giving AI the Right Room to Think",
+          objective: "Move beyond one-line prompts by supplying role, goal, constraints, examples, and evaluation criteria.",
           paragraphs: [
-            "Direct Current (DC) flows in one steady direction over time, which is why batteries, USB ports, and most beginner electronics circuits rely on DC.",
-            "Alternating Current (AC) reverses direction back and forth periodically—for example in household wall outlets. Transformers step AC voltages up or down efficiently for power distribution.",
-            "Before plugging anything into mains AC, remember that beginner electronics labs focus on low-voltage DC (like 3.3 V, 5 V, or 9 V) where you can learn safely."
+            "Many people blame 'bad AI' when a one-sentence prompt returns a vague answer. Often, the model simply lacked the context a human colleague would need to do the job well.",
+            "Context engineering means curating the exact information the model needs: your objective, audience, boundaries, formatting rules, and one or two strong examples. Less noise and clearer criteria produce cleaner results.",
+            "Before moving to Lesson 5, re-read this section and notice how specific context replaces guesswork. Treat every prompt like a concise creative brief."
           ],
           takeaways: [
-            "DC flows in one direction; batteries and USB supply DC.",
-            "AC reverses direction periodically and is common in wall power and grids.",
-            "Stick to low-voltage DC for beginner breadboard learning."
+            "Vague inputs usually produce vague outputs.",
+            "Include goal, constraints, examples, and desired format in your context.",
+            "Iterative refinement turns a rough draft into a tailored solution."
           ],
-          invideoPrompt: "Graph and circuit visual contrasting steady DC line vs. oscillating AC wave."
+          invideoPrompt: "Side-by-side visual contrast of a vague prompt vs. a structured context brief."
         },
         fr: {
-          title: "Courant Continu (DC) vs Courant Alternatif (AC)",
-          objective: "Sachez quand l'électronique utilise le courant continu et quand le secteur fournit l'alternatif.",
+          title: "Ingénierie du Contexte : Donner à l'IA un Cadre Clair",
+          objective: "Dépassez la simple phrase en fournissant objectif, contraintes, exemples et critères d'évaluation.",
           paragraphs: [
-            "Le courant continu (DC) circule dans un seul sens : les piles, batteries et ports USB fournissent du courant continu, idéal pour débuter en électronique.",
-            "Le courant alternatif (AC) inverse périodiquement son sens—comme sur les prises murales. Il permet de transporter l'énergie électrique sur de longues distances.",
-            "Pour débuter en toute sécurité, travaillez en basse tension continue (par exemple 3,3 V, 5 V ou 9 V) plutôt que sur le secteur."
+            "Beaucoup accusent l'IA lorsqu'une demande en une ligne produit une réponse vague. Souvent, il manquait simplement au modèle le contexte qu'un collègue aurait eu besoin pour bien faire.",
+            "L'ingénierie du contexte consiste à réunir les informations utiles : objectif, public, limites, format souhaité et un ou deux bons exemples. Moins de bruit et des critères clairs donnent de meilleurs résultats.",
+            "Avant de passer à la Leçon 5, relisez ce passage et voyez comment un contexte précis remplace les suppositions. Traitez chaque demande comme un brief clair."
           ],
           takeaways: [
-            "Le courant continu (DC) garde un seul sens (piles, batteries, USB).",
-            "Le courant alternatif (AC) change de sens périodiquement.",
-            "Privilégiez la basse tension continue pour vos premiers montages."
+            "Une demande vague produit généralement une réponse vague.",
+            "Précisez l'objectif, les contraintes, des exemples et le format attendu.",
+            "L'ajustement pas à pas transforme un brouillon en solution adaptée."
           ],
-          invideoPrompt: "Animation comparant une tension continue constante (DC) et une onde alternative (AC)."
+          invideoPrompt: "Comparaison visuelle côte à côte entre une demande vague et un brief structuré."
         },
         invideoEmbedUrl: "",
         audioUrl: ""
       },
       5: {
         en: {
-          title: "Reading Resistor Color Bands",
-          objective: "Decode standard 4-band resistor values quickly so you pick the right resistor every time.",
+          title: "Designing Personal AI Workflows That Save Real Hours",
+          objective: "Turn repeated daily tasks into reliable step-by-step workflows with human checkpoints.",
           paragraphs: [
-            "Many through-hole resistors use colored stripes to show their resistance value in ohms because the part itself is too small to print full numbers clearly.",
-            "On a common 4-band resistor, the first two bands give the significant digits, the third band is the multiplier (how many zeros or power of ten to apply), and the fourth band shows tolerance (accuracy).",
-            "Practice reading one or two resistors carefully and always verify with a digital multimeter when you are unsure."
+            "A workflow is a repeatable chain of steps—such as gathering notes, summarizing key points, drafting an outline, and checking accuracy. Automating a broken step only speeds up mistakes.",
+            "The most reliable AI workflows keep a human checkpoint right before anything is published, sent, or acted upon. You let software handle drafting, formatting, and sorting while you own quality and decisions.",
+            "Listen to the AI Professor read this again and pick one recurring task from your week that you can map into three clear steps."
           ],
           takeaways: [
-            "4-band resistors: Digit 1, Digit 2, Multiplier, and Tolerance.",
-            "Color codes let you read values quickly at a glance.",
-            "A multimeter confirms exact resistance when colors look faded or close."
+            "Map the manual process before automating it.",
+            "Keep a human review step before external action.",
+            "Small weekly workflow improvements compound across Year 1."
           ],
-          invideoPrompt: "Close-up visual guide to decoding 4 resistor color bands into ohms."
+          invideoPrompt: "Workflow diagram showing Step 1 Input -> AI Draft -> Human Check -> Final Output."
         },
         fr: {
-          title: "Lire les Anneaux de Couleur d'une Résistance",
-          objective: "Décodez rapidement les résistances à 4 anneaux pour choisir la bonne valeur à chaque montage.",
+          title: "Concevoir des Flux de Travail IA Qui Font Gagner du Temps",
+          objective: "Transformez les tâches répétitives en étapes fiables avec des points de contrôle humains.",
           paragraphs: [
-            "De nombreuses résistances utilisent des anneaux de couleur pour indiquer leur valeur en ohms, car le boîtier est trop petit pour inscrire un texte lisible.",
-            "Sur une résistance classique à 4 anneaux, les deux premiers donnent les chiffres significatifs, le troisième est le multiplicateur, et le quatrième indique la tolérance.",
-            "Entraînez-vous à lire les couleurs calmement et vérifiez toujours au multimètre en cas de doute."
+            "Un flux de travail est une suite d'étapes reproductibles : rassembler des notes, résumer l'essentiel, structurer un plan et vérifier l'exactitude. Automatiser une étape floue ne fait qu'accélérer les erreurs.",
+            "Les flux les plus fiables gardent une validation humaine avant toute publication, envoi ou décision. Vous confiez la mise en forme et le tri aux outils, tout en gardant la maîtrise de la qualité.",
+            "Écoutez à nouveau le Professeur IA et choisissez une tâche récurrente de votre semaine à découper en trois étapes claires."
           ],
           takeaways: [
-            "Résistance à 4 anneaux : Chiffre 1, Chiffre 2, Multiplicateur et Tolérance.",
-            "Le code couleur permet une lecture rapide sur la table de travail.",
-            "Le multimètre confirme la valeur réelle en cas de doute."
+            "Clarifiez le processus manuel avant de l'automatiser.",
+            "Gardez une vérification humaine avant toute diffusion ou action.",
+            "De petites améliorations hebdomadaires s'accumulent sur toute l'année."
           ],
-          invideoPrompt: "Guide visuel expliquant le décodage des 4 anneaux de couleur d'une résistance."
+          invideoPrompt: "Schéma montrant Étape 1 Entrée -> Brouillon IA -> Vérification Humaine -> Résultat Final."
         },
         invideoEmbedUrl: "",
         audioUrl: ""
@@ -1023,76 +1338,66 @@
     };
 
     const CURRICULUM_TOPICS_6_TO_100 = [
-      { en: "Series vs. Parallel Circuits", fr: "Circuits en Série vs Circuits en Parallèle" },
-      { en: "Voltage Dividers Explained Simply", fr: "Ponts Diviseurs de Tension Expliqués Simplement" },
-      { en: "Electrical Power: Watts (P = V × I)", fr: "Puissance Électrique : Watts (P = U × I)" },
-      { en: "Ground (GND) and Reference Points", fr: "La Masse (GND) et les Points de Référence" },
-      { en: "Essential Electronics Lab Safety Rules", fr: "Règles Essentielles de Sécurité en Électronique" },
-      { en: "Potentiometers and Variable Resistance", fr: "Potentiomètres et Résistance Variable" },
-      { en: "Capacitors: Storing Electrical Charge", fr: "Condensateurs : Stocker la Charge Électrique" },
-      { en: "Polarized vs. Non-Polarized Capacitors", fr: "Condensateurs Polarisés et Non Polarisés" },
-      { en: "RC Timing and Smoothing Basics", fr: "Bases des Circuits RC, Temporisation et Filtrage" },
-      { en: "Inductors and Magnetic Fields", fr: "Bobines (Inductances) et Champs Magnétiques" },
-      { en: "Reading Basic Circuit Schematics", fr: "Lire des Schémas Électriques Simples" },
-      { en: "Circuit Symbols You Must Know", fr: "Symboles Électriques Indispensables" },
-      { en: "Switches: SPST, SPDT, and Pushbuttons", fr: "Interrupteurs : SPST, SPDT et Boutons-Poussoirs" },
-      { en: "Fuses and Overcurrent Protection", fr: "Fusibles et Protection contre les Surintensités" },
-      { en: "Track 1–2 Review: Core Foundations", fr: "Bilan Parcours 1–2 : Fondamentaux" },
-      { en: "How a Solderless Breadboard Works", fr: "Comment Fonctionne une Plaque d'Essai (Breadboard)" },
-      { en: "Power Rails and Row Connections", fr: "Rails d'Alimentation et Connexions sur Breadboard" },
-      { en: "Using a Digital Multimeter: Voltage", fr: "Utiliser un Multimètre Numérique : Mesurer la Tension" },
-      { en: "Using a Digital Multimeter: Resistance & Continuity", fr: "Multimètre : Résistance et Test de Continuité" },
-      { en: "Measuring Current Safely with a Multimeter", fr: "Mesurer le Courant en Sécurité au Multimètre" },
-      { en: "Building Your First LED + Resistor Circuit", fr: "Monter Votre Premier Circuit LED + Résistance" },
-      { en: "Calculating LED Current-Limiting Resistors", fr: "Calculer la Résistance d'une LED" },
-      { en: "Wiring Two LEDs in Series vs. Parallel", fr: "Câbler Deux LED en Série ou en Parallèle" },
-      { en: "Controlling an LED with a Pushbutton", fr: "Commander une LED avec un Bouton-Poussoir" },
-      { en: "Troubleshooting Dead or Dim Circuits", fr: "Diagnostiquer un Montage Qui Ne S'Allume Pas" },
-      { en: "Wire Gauges, Jumper Wires, and Connections", fr: "Sections de Fils, Câbles Dupont et Connexions" },
-      { en: "Soldering Basics and Safety", fr: "Bases de la Soudure à l'Étain et Sécurité" },
-      { en: "Inspecting Good vs. Cold Solder Joints", fr: "Reconnaître une Bonne Soudure d'une Soudure Froide" },
-      { en: "Desoldering and Fixing Wiring Mistakes", fr: "Dessouder et Corriger les Erreurs de Câblage" },
-      { en: "Building a Clean Beginner Test Bench", fr: "Organiser un Coin Travail Débutant Fiable" },
-      { en: "Semiconductors: Conductors vs. Insulators", fr: "Semi-Conducteurs : Conducteurs vs Isolants" },
-      { en: "Diodes: One-Way Streets for Current", fr: "Diodes : Sens Unique pour le Courant" },
-      { en: "Forward Bias, Reverse Bias, and Voltage Drop", fr: "Polarisation Directe, Inverse et Chute de Tension" },
-      { en: "Protection Diodes and Flyback Protection", fr: "Diodes de Roue Libre et Protection" },
-      { en: "Zener Diodes and Voltage Reference Basics", fr: "Diodes Zener et Régulation de Base" },
-      { en: "Bipolar Junction Transistors (NPN & PNP)", fr: "Transistors Bipolaires (NPN et PNP)" },
-      { en: "Using a Transistor as an Electronic Switch", fr: "Utiliser un Transistor comme Interrupteur" },
-      { en: "Using a Transistor to Amplify Signals", fr: "Utiliser un Transistor pour Amplifier un Signal" },
-      { en: "MOSFETs: High-Efficiency Switching Basics", fr: "MOSFET : Bases de la Commutation Efficace" },
-      { en: "Relays: Low Voltage Controlling Higher Loads", fr: "Relais : Commander une Charge avec une Faible Tension" },
-      { en: "Digital vs. Analog Signals in Electronics", fr: "Signaux Numériques vs Signaux Analogiques" },
-      { en: "Logic Gates: AND, OR, NOT, NAND, NOR", fr: "Portes Logiques : ET, OU, NON, NON-ET, NON-OU" },
-      { en: "Truth Tables Made Simple", fr: "Tables de Vérité Expliquées Simplement" },
-      { en: "Pull-Up and Pull-Down Resistors", fr: "Résistances de Tirage (Pull-Up et Pull-Down)" },
-      { en: "Debouncing Mechanical Buttons", fr: "Anti-Rebond des Boutons Mécaniques" },
-      { en: "Batteries: AA, Li-Ion, LiPo, and Care", fr: "Batteries : AA, Li-Ion, LiPo et Précautions" },
-      { en: "Linear Voltage Regulators (Like 7805)", fr: "Régulateurs de Tension Linéaires (Type 7805)" },
-      { en: "Buck Converters vs. Linear Regulators", fr: "Convertisseurs Buck vs Régulateurs Linéaires" },
-      { en: "USB Power (5V) and Power Banks", fr: "Alimentation USB (5V) et Batteries Externes" },
-      { en: "Sensors: Light (LDR) and Photodiodes", fr: "Capteurs : Lumière (LDR) et Photodiodes" },
-      { en: "Temperature and Humidity Sensors", fr: "Capteurs de Température et d'Humidité" },
-      { en: "Ultrasonic and Infrared Distance Sensors", fr: "Capteurs de Distance Ultrasons et Infrarouge" },
-      { en: "Reading Analog Sensors Safely", fr: "Lire un Capteur Analogique en Sécurité" },
-      { en: "Buzzers, Piezos, and Simple Sound Output", fr: "Buzzers, Piézo et Sortie Sonore Simple" },
-      { en: "DC Motors and Why They Need Drivers", fr: "Moteurs CC et Rôle des Circuits de Commande" },
-      { en: "Servo Motors for Controlled Angles", fr: "Servomoteurs pour un Positionnement Précis" },
-      { en: "What Is a Microcontroller?", fr: "Qu'est-ce qu'un Microcontrôleur ?" },
-      { en: "Digital Pins: Output vs. Input", fr: "Broches Numériques : Sortie vs Entrée" },
-      { en: "PWM (Pulse Width Modulation) Explained", fr: "La MLI / PWM Expliquée Simplement" },
-      { en: "Serial Communication and Debugging Logs", fr: "Communication Série et Débogage par Messages" },
-      { en: "I2C and SPI Basics for Modules", fr: "Bases des Bus I2C et SPI pour Capteurs/Écrans" },
-      { en: "Connecting an OLED or LCD Display", fr: "Connecter un Petit Écran OLED ou LCD" },
-      { en: "Avoiding Common Beginner Wiring Mistakes", fr: "Éviter les Erreurs Classiques de Câblage" },
-      { en: "Reading Datasheets Without Getting Overwhelmed", fr: "Lire une Fiche Technique (Datasheet) Simplement" },
-      { en: "Project 1: Automatic Night Light Circuit", fr: "Projet 1 : Veilleuse Automatique à Capteur de Lumière" },
-      { en: "Project 2: Dual-Button Logic Controller", fr: "Projet 2 : Contrôleur Logique à Deux Boutons" },
-      { en: "Project 3: Temperature Monitor with Alert", fr: "Projet 3 : Moniteur de Température avec Alerte" },
-      { en: "Project 4: Variable Speed Fan / Motor Rig", fr: "Projet 4 : Variateur de Vitesse Moteur / Ventilateur" },
-      { en: "Documenting Your Electronics Builds", fr: "Documenter Vos Montages Électroniques" },
-      { en: "Graduating Beginner Electronics: Next Steps", fr: "Bilan Débutant en Électronique : Étapes Suivantes" }
+      { en: "Active Note-Taking & Idea Linking", fr: "Prise de Notes Active et Connexion d'Idées" },
+      { en: "Spotting Logical Fallacies & Bias", fr: "Repérer les Sophismes et les Biais Logiques" },
+      { en: "Mental Models: Inversion & Second-Order Effects", fr: "Modèles Mentaux : Inversion et Effets de Second Ordre" },
+      { en: "Reading Dense Technical Material Slowly", fr: "Lire Lentement un Contenu Technique Dense" },
+      { en: "Structuring Arguments Clearly", fr: "Structurer un Argumentaire avec Clarté" },
+      { en: "Information Hygiene & Source Credibility", fr: "Hygiène de l'Information et Crédibilité des Sources" },
+      { en: "Time-Blocking & Deep Focus Habits", fr: "Blocage du Temps et Habitudes de Concentration Profonde" },
+      { en: "Turning Confusion into Specific Questions", fr: "Transformer la Confusion en Questions Précises" },
+      { en: "Comparing Frameworks Without Dogma", fr: "Comparer les Méthodes sans Dogmatisme" },
+      { en: "Writing Crisp Summaries from Long Sources", fr: "Rédiger des Résumés Clairs à Partir de Sources Longues" },
+      { en: "Root-Cause Analysis (5 Whys & Fishbone)", fr: "Analyse des Causes Racines (5 Pourquoi et Ishikawa)" },
+      { en: "Decision Matrices & Trade-Offs", fr: "Matrices de Décision et Arbitrages" },
+      { en: "Building a Personal Knowledge Base", fr: "Construire une Base de Connaissances Personnelle" },
+      { en: "Memory Anchors & Spaced Review", fr: "Ancrages de Mémoire et Révision Espacée" },
+      { en: "Mastering Year-1 Thinking Foundations", fr: "Synthèse des Fondamentaux de Réflexion (1re Année)" },
+      { en: "Embeddings, Vector Search & Retrieval (RAG)", fr: "Vecteurs, Recherche Sémantique et Récupération (RAG)" },
+      { en: "Multimodal AI: Text, Voice, Image & Video", fr: "IA Multimodale : Texte, Voix, Image et Vidéo" },
+      { en: "Hallucinations: Why They Happen & How to Catch Them", fr: "Hallucinations IA : Causes et Détection" },
+      { en: "Prompting vs. System Instructions & Guardrails", fr: "Prompts, Instructions Système et Garde-Fous" },
+      { en: "Temperature, Determinism & Model Selection", fr: "Température, Déterminisme et Choix du Modèle" },
+      { en: "Data Privacy, Consent & AI Ethics", fr: "Confidentialité des Données, Consentement et Éthique IA" },
+      { en: "Copyright, Attribution & Responsible Use", fr: "Droits d'Auteur, Attribution et Usage Responsable" },
+      { en: "Evaluating AI Outputs with Rubrics", fr: "Évaluer les Réponses de l'IA avec des Critères" },
+      { en: "When NOT to Use AI", fr: "Quand Ne Pas Utiliser l'IA" },
+      { en: "Fact-Checking & Citation Discipline", fr: "Vérification des Faits et Rigueur des Citations" },
+      { en: "Understanding APIs & Web Basics", fr: "Comprendre les API et les Bases du Web" },
+      { en: "Working with Spreadsheets & Structured Data", fr: "Travailler avec les Tableurs et Données Structurées" },
+      { en: "AI-Assisted Coding for Beginners", fr: "Programmation Assistée par IA pour Débutants" },
+      { en: "Reading Code & Debugging with AI", fr: "Lire du Code et Déboguer avec l'IA" },
+      { en: "Version Control Basics with Git & GitHub", fr: "Bases du Versioning avec Git et GitHub" },
+      { en: "Automating Repetitive Text & File Tasks", fr: "Automatiser les Tâches Répétitives de Texte et Fichiers" },
+      { en: "Building Simple Web Pages & Tools", fr: "Créer des Pages Web et Outils Simples" },
+      { en: "Cleaning Messy Data Safely", fr: "Nettoyer des Données Imparfaites en Sécurité" },
+      { en: "Testing Edge Cases & Failure Modes", fr: "Tester les Cas Limites et Modes de Défaillance" },
+      { en: "Documenting Your Tools for Others", fr: "Documenter Vos Outils pour d'Autres Personnes" },
+      { en: "Introduction to AI Agents & Tool Use", fr: "Introduction aux Agents IA et à l'Usage d'Outils" },
+      { en: "Multi-Step Planning & Task Decomposition", fr: "Planification en Étapes et Découpage des Tâches" },
+      { en: "Deep Research Workflows with Source Synthesis", fr: "Recherche Approfondie et Synthèse de Sources" },
+      { en: "Comparing Conflicting Claims Fairly", fr: "Comparer les Affirmations Contradictoires avec Justesse" },
+      { en: "Decision-Making Under Uncertainty", fr: "Décider en Situation d'Incertitude" },
+      { en: "Risk Assessment & Contingency Planning", fr: "Évaluation des Risques et Plans de Secours" },
+      { en: "Personal Productivity Systems with AI", fr: "Systèmes de Productivité Personnelle avec l'IA" },
+      { en: "Turning Research into Action Plans", fr: "Transformer la Recherche en Plans d'Action" },
+      { en: "Auditing Your Own Biases", fr: "Examiner Ses Propres Biais" },
+      { en: "Year-1 Systems & Agent Mastery Review", fr: "Bilan 1re Année : Systèmes et Agents IA" },
+      { en: "Clear Writing: Lead with the Point", fr: "Écrire Clairement : Aller à l'Essentiel d'Abord" },
+      { en: "Storytelling & Explaining Complex Ideas", fr: "Récit et Vulgarisation d'Idées Complexes" },
+      { en: "Visual Thinking & Slide/Diagram Structure", fr: "Pensée Visuelle, Schémas et Présentations" },
+      { en: "Creating Visual Explainers with InVideo", fr: "Créer des Vidéos Explicatives avec InVideo" },
+      { en: "Scripting Short Educational Videos", fr: "Écrire le Scénario de Courtes Vidéos Pédagogiques" },
+      { en: "Voice, Pacing & Tone in Communication", fr: "Voix, Rythme et Ton dans la Communication" },
+      { en: "Designing a Public Learning Portfolio", fr: "Concevoir un Portfolio d'Apprentissage Public" },
+      { en: "Giving & Receiving Constructive Feedback", fr: "Donner et Recevoir un Retour Constructif" },
+      { en: "Collaborating Across Teams & Time Zones", fr: "Collaborer entre Équipes et Fuseaux Horaires" },
+      { en: "Ethics of Synthetic Media & Transparency", fr: "Éthique des Médias Synthétiques et Transparence" },
+      { en: "Adapting When Tools Change Every Month", fr: "S'Adapter Quand les Outils Évoluent Chaque Mois" },
+      { en: "Career Positioning in an AI-Augmented Economy", fr: "Positionnement Professionnel dans une Économie Augmentée par l'IA" },
+      { en: "Solving Real Community & Workplace Problems", fr: "Résoudre des Problèmes Concrets de Terrain" },
+      { en: "Capstone Planning: Your Year-1 Project", fr: "Préparation du Projet de Fin de 1re Année" },
+      { en: "Graduating Year 1 as a Lifelong Learner", fr: "Clôturer la 1re Année en Apprenant Autonome" }
     ];
 
     function buildAllLessons() {
@@ -1110,8 +1415,8 @@
           });
         } else {
           const item = CURRICULUM_TOPICS_6_TO_100[num - 6] || {
-            en: `Beginner Electronics Topic ${num}`,
-            fr: `Thème d'Électronique Débutant ${num}`
+            en: `Modern AI-Era Topic ${num}`,
+            fr: `Thème Moderne de l'Ère IA ${num}`
           };
           const nextNum = Math.min(100, num + 1);
           lessons.push({
@@ -1121,33 +1426,33 @@
             audioUrl: "",
             en: {
               title: item.en,
-              objective: `Build practical understanding of "${item.en}" through 2–3 reading passes, AI Professor audio, and reflection.`,
+              objective: `Build practical mastery in "${item.en}" through multi-pass reading, AI Professor narration, and reflection.`,
               paragraphs: [
-                `Welcome to Lesson ${num} of Basic Electronics For Beginners in ${TRACKS[trackNum].en}. Today we explore ${item.en}, an essential building block for real circuits.`,
-                `Take a calm first read to see how ${item.en} fits into circuit behavior. Then read a second time while listening to the AI Professor narration so terms, symbols, and practical use connect clearly.`,
-                `On your third pass, write down how ${item.en} behaves in a real circuit and what to check before applying power.`
+                `Welcome to Lesson ${num} of Gesner Deslandes Lifelong Learning University inside ${TRACKS[trackNum].en}. Today's focus is ${item.en}, a core capability for navigating modern work and learning alongside AI.`,
+                `Begin with a calm first read to see how ${item.en} fits into the bigger picture. Then read a second time while listening to the AI Professor narration, paying attention to how concepts connect to real tasks you perform.`,
+                `For your third pass, pause and ask how you can apply ${item.en} this week. Writing a short summary in your own words reveals what you truly grasp and what deserves another look.`
               ],
               takeaways: [
-                `Key focus: ${item.en} helps you build and troubleshoot circuits reliably.`,
-                `Read 2–3 times and listen to the AI Professor to reinforce key ideas.`,
-                `Apply this concept before moving on to Lesson ${nextNum}.`
+                `Core concept: ${item.en} strengthens practical judgment in the AI era.`,
+                `Read 2–3 times and listen to the AI Professor to deepen retention.`,
+                `Apply the idea to a concrete example before moving to Lesson ${nextNum}.`
               ],
-              invideoPrompt: `Visual circuit explainer for Lesson ${num}: "${item.en}" in Basic Electronics For Beginners.`
+              invideoPrompt: `Visual explainer for Lesson ${num}: "${item.en}" in the Gesner Deslandes University style.`
             },
             fr: {
               title: item.fr,
-              objective: `Développez une compréhension pratique de « ${item.fr} » grâce à 2–3 lectures, l'audio du Professeur IA et la réflexion.`,
+              objective: `Développez une maîtrise pratique de « ${item.fr} » grâce à la lecture en plusieurs passes, la voix du Professeur IA et la réflexion.`,
               paragraphs: [
-                `Bienvenue à la Leçon ${num} d'Électronique de Base pour Débutants dans le ${TRACKS[trackNum].fr}. Aujourd'hui, nous étudions « ${item.fr} », une notion clé pour vos montages.`,
-                `Faites une première lecture calme pour saisir le rôle de « ${item.fr} ». Relisez ensuite une deuxième fois en écoutant le Professeur IA pour relier termes, symboles et pratique.`,
-                `Lors de la troisième passe, notez comment « ${item.fr} » agit dans un circuit et ce qu'il faut vérifier avant la mise sous tension.`
+                `Bienvenue à la Leçon ${num} de l'Université d'Apprentissage Continu Gesner Deslandes dans le ${TRACKS[trackNum].fr}. Aujourd'hui, nous explorons « ${item.fr} », une compétence essentielle à l'ère de l'IA.`,
+                `Commencez par une première lecture calme pour saisir la vue d'ensemble. Relisez ensuite une deuxième fois en écoutant le Professeur IA afin de relier les notions à vos tâches concrètes.`,
+                `Lors de la troisième passe, demandez-vous comment appliquer « ${item.fr} » cette semaine. Résumer l'idée avec vos propres mots montre ce que vous maîtrisez vraiment.`
               ],
               takeaways: [
-                `Point clé : « ${item.fr} » vous aide à monter et dépanner vos circuits.`,
-                `Lisez 2 à 3 fois et écoutez le Professeur IA pour bien retenir.`,
-                `Assimilez cette leçon avant de passer à la Leçon ${nextNum}.`
+                `Idée centrale : « ${item.fr} » renforce votre discernement à l'ère de l'IA.`,
+                `Lisez 2 à 3 fois et écoutez le Professeur IA pour mieux mémoriser.`,
+                `Appliquez ce principe à un exemple concret avant la Leçon ${nextNum}.`
               ],
-              invideoPrompt: `Capsule visuelle de circuit pour la Leçon ${num} : « ${item.fr} ».`
+              invideoPrompt: `Capsule visuelle pour la Leçon ${num} : « ${item.fr} » dans le style de l'Université Gesner Deslandes.`
             }
           });
         }
@@ -1156,7 +1461,7 @@
     }
 
     const LESSONS = buildAllLessons();
-    const STORAGE_KEY = "beb_codex_state_v1";
+    const STORAGE_KEY = "gdllu_nvidia_codex_v1";
 
     function loadState() {
       try {
@@ -1165,6 +1470,7 @@
           const parsed = JSON.parse(raw);
           return {
             lang: parsed.lang === "fr" ? "fr" : "en",
+            nvMode: ["skim", "deep", "quiz"].includes(parsed.nvMode) ? parsed.nvMode : "deep",
             currentLesson: parsed.currentLesson || 1,
             currentPass: parsed.currentPass || 1,
             speechRate: parsed.speechRate || 1.0,
@@ -1174,6 +1480,7 @@
       } catch (e) {}
       return {
         lang: "en",
+        nvMode: "deep",
         currentLesson: 1,
         currentPass: 1,
         speechRate: 1.0,
@@ -1230,6 +1537,7 @@
       const strings = t();
       document.documentElement.lang = state.lang;
       document.getElementById("langToggleBtn").textContent = strings.langBtn;
+      document.getElementById("openDevModalBtn").textContent = strings.openDevModalBtn;
       document.getElementById("brandTitle").textContent = strings.brandTitle;
       document.getElementById("brandSub").textContent = strings.brandSub;
       document.getElementById("resetProgressBtn").textContent = strings.resetBtn;
@@ -1260,12 +1568,33 @@
       document.getElementById("logReadBtn").textContent = strings.logReadBtn;
       document.getElementById("completePassBtn").textContent = strings.completePassBtn;
 
+      document.getElementById("nvStudioTitle").textContent = strings.nvStudioTitle;
+      document.getElementById("nvModeSkim").textContent = strings.nvModeSkim;
+      document.getElementById("nvModeDeep").textContent = strings.nvModeDeep;
+      document.getElementById("nvModeQuiz").textContent = strings.nvModeQuiz;
+
+      document.querySelectorAll(".nv-mode-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.nvMode === state.nvMode);
+      });
+      const modeSpec = strings.nvTelemetry[state.nvMode] || strings.nvTelemetry.deep;
+      document.getElementById("nvTelemetryBox").textContent = modeSpec.line;
+      document.getElementById("nvMeterFill").style.width = modeSpec.pct;
+
       document.getElementById("invideoHeading").textContent = strings.invideoHeading;
       document.getElementById("takeawaysHeading").textContent = strings.takeawaysHeading;
       document.getElementById("reflectionHeading").textContent = strings.reflectionHeading;
       document.getElementById("reflectionPrompt").textContent = strings.reflectionPrompt;
       document.getElementById("reflectionInput").placeholder = strings.reflectionPlaceholder;
       document.getElementById("saveNoteBtn").textContent = strings.saveNoteBtn;
+
+      document.getElementById("devHeading").textContent = strings.devHeading;
+      document.getElementById("devRole").textContent = strings.devRole;
+      document.getElementById("devPhoneLabel").textContent = strings.devPhoneLabel;
+      document.getElementById("devEmailLabel").textContent = strings.devEmailLabel;
+      document.getElementById("devWebsiteLabel").textContent = strings.devWebsiteLabel;
+
+      document.getElementById("modalTitle").textContent = strings.modalTitle;
+      document.getElementById("modalIntro").innerHTML = strings.modalIntro;
 
       document.getElementById("prevLessonBtn").textContent = strings.prevBtn;
       document.getElementById("nextLessonBtn").textContent = strings.nextBtn;
@@ -1366,11 +1695,11 @@
       } else {
         invideoEl.innerHTML = `
           <div class="video-placeholder">
-            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:#fb923c;font-weight:700;">
+            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--nv-green-bright);font-weight:700;">
               ${escapeHtml(strings.invideoSlotReady)}
             </div>
             <p>${escapeHtml(content.invideoPrompt)}</p>
-            <span style="font-size:0.75rem;color:#a8a29e;">
+            <span style="font-size:0.75rem;color:#9aa394;">
               ${escapeHtml(strings.invideoHelp)}
             </span>
           </div>
@@ -1389,7 +1718,7 @@
       document.getElementById("nextLessonBtn").disabled = lesson.number >= 100;
 
       const completedCount = LESSONS.filter((l) => isLessonComplete(l.number)).length;
-      document.getElementById("overallProgress").textContent = strings.overallProgress(completedCount);
+      document.getElementById("progressCountText").textContent = strings.overallProgress(completedCount);
     }
 
     function renderAll() {
@@ -1470,6 +1799,30 @@
     function escapeAttribute(str) {
       return escapeHtml(str).replaceAll("'", "&#39;");
     }
+
+    const devModal = document.getElementById("devModal");
+    document.getElementById("openDevModalBtn").addEventListener("click", () => {
+      devModal.classList.add("open");
+    });
+    document.getElementById("closeDevModalBtn").addEventListener("click", () => {
+      devModal.classList.remove("open");
+    });
+    document.getElementById("closeDevModalBtnBottom").addEventListener("click", () => {
+      devModal.classList.remove("open");
+    });
+    devModal.addEventListener("click", (e) => {
+      if (e.target === devModal) {
+        devModal.classList.remove("open");
+      }
+    });
+
+    document.querySelectorAll(".nv-mode-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.nvMode = btn.dataset.nvMode;
+        saveState();
+        renderStaticChrome();
+      });
+    });
 
     document.getElementById("langToggleBtn").addEventListener("click", () => {
       stopSpeech();
@@ -1555,6 +1908,7 @@
         const currentLang = state.lang;
         state = {
           lang: currentLang,
+          nvMode: "deep",
           currentLesson: 1,
           currentPass: 1,
           speechRate: 1.0,
